@@ -1,12 +1,15 @@
 package lab02;
 
+import java.util.Random;
+
 public class Sinistro {
     int id;
     String data;
     String endereco;
 
-    public Sinistro(int id, String data, String endereco) {
-        this.id = id;
+    public Sinistro(String data, String endereco) {
+        Random random = new Random();
+        this.id = random.nextInt();
         this.data = data;
         this.endereco = endereco;
     }

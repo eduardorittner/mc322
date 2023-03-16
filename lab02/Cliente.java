@@ -9,8 +9,12 @@ public class Cliente {
     int idade;
 
     public Cliente(String nome, String cpf, String dataNascimento, int idade, String endereco) {
+        if (validarCPF()) {
+            this.cpf = cpf;
+        } else {
+            this.cpf = "invalido";
+        }
         this.nome = nome;
-        this.cpf = cpf;
         this.dataNascimento = dataNascimento;
         this.idade = idade;
         this.endereco = endereco;
@@ -58,6 +62,7 @@ public class Cliente {
 
         String resultado = Integer.toString(primeiro_digito_verificador)
                 .concat(Integer.toString(segundo_digito_verificador));
+
         return resultado;
     }
 
@@ -71,7 +76,7 @@ public class Cliente {
         return true;
     }
 
-    public boolean validarCPF() {
+    private boolean validarCPF() {
         cpf.replaceAll("[^\\d]", "");
         if (cpf.length() != 11) {
             return false;
