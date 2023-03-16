@@ -1,5 +1,3 @@
-package lab02;
-
 public class Veiculo {
     String placa;
     String marca;
