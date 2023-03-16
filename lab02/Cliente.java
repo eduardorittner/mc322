@@ -1,3 +1,5 @@
+package lab02;
+
 public class Cliente {
 
     String nome;
@@ -14,7 +16,7 @@ public class Cliente {
         this.endereco = endereco;
     }
 
-    private boolean digitosIguaisCPF(String cpf) {
+    private boolean cpfDigitosIguais(String cpf) {
         for (int i = 1; i < 11; i++) {
             if (cpf.charAt(i) != cpf.charAt(i - 1)) {
                 return false;
@@ -59,15 +61,26 @@ public class Cliente {
         return resultado;
     }
 
+    private boolean digitosVerificadoresIguais(String digitos_1, String digitos_2) {
+        if (digitos_1.charAt(0) != digitos_2.charAt(0)) {
+            return false;
+        }
+        if (digitos_1.charAt(1) != digitos_2.charAt(1)) {
+            return false;
+        }
+        return true;
+    }
+
     public boolean validarCPF() {
         cpf.replaceAll("[^\\d]", "");
         if (cpf.length() != 11) {
             return false;
         }
-        if (digitosIguaisCPF(cpf)) {
+        if (cpfDigitosIguais(cpf)) {
             return false;
         }
         String digitos_verificadores = digitosVerificadoresCPF(cpf);
+        String digitos_verificadores_cpf = cpf.substring(10);
         if (digitos_verificadores.charAt(0) != cpf.charAt(9)) {
             return false;
         }

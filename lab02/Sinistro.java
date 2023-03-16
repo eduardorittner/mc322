@@ -1,3 +1,5 @@
+package lab02;
+
 public class Sinistro {
     int id;
     String data;
