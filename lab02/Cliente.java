@@ -9,15 +9,11 @@ public class Cliente {
     int idade;
 
     public Cliente(String nome, String cpf, String dataNascimento, int idade, String endereco) {
-        if (validarCPF()) {
-            this.cpf = cpf;
-        } else {
-            this.cpf = "invalido";
-        }
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.idade = idade;
         this.endereco = endereco;
+        setCpf(cpf);
     }
 
     private boolean cpfDigitosIguais(String cpf) {
@@ -66,30 +62,16 @@ public class Cliente {
         return resultado;
     }
 
-    private boolean digitosVerificadoresIguais(String digitos_1, String digitos_2) {
-        if (digitos_1.charAt(0) != digitos_2.charAt(0)) {
-            return false;
-        }
-        if (digitos_1.charAt(1) != digitos_2.charAt(1)) {
-            return false;
-        }
-        return true;
-    }
+    public boolean validarCPF(String cpf) {
+        cpf = cpf.replaceAll("[^\\d]", "");
 
-    private boolean validarCPF() {
-        cpf.replaceAll("[^\\d]", "");
         if (cpf.length() != 11) {
             return false;
         }
         if (cpfDigitosIguais(cpf)) {
             return false;
         }
-        String digitos_verificadores = digitosVerificadoresCPF(cpf);
-        String digitos_verificadores_cpf = cpf.substring(10);
-        if (digitos_verificadores.charAt(0) != cpf.charAt(9)) {
-            return false;
-        }
-        if (digitos_verificadores.charAt(1) != cpf.charAt(10)) {
+        if (digitosVerificadoresCPF(cpf) == cpf.substring(10)) {
             return false;
         }
         return true;
@@ -108,7 +90,11 @@ public class Cliente {
     }
 
     public void setCpf(String cpf) {
-        this.cpf = cpf;
+        if (validarCPF(cpf)) {
+            this.cpf = cpf;
+        } else {
+            this.cpf = "invalido";
+        }
     }
 
     public String getDataNascimento() {
@@ -137,7 +123,8 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente [cpf=" + cpf + ", dataNascimento=" + dataNascimento + ", endereco=" + endereco + ", idade="
-                + idade + ", nome=" + nome + "]";
+        return "Cliente [cpf = " + cpf + ", dataNascimento = " + dataNascimento + ", endereco = " + endereco
+                + ", idade = "
+                + idade + ", nome = " + nome + "]";
     }
 }
