@@ -1,5 +1,3 @@
-package lab02;
-
 public class Cliente {
 
     String nome;
@@ -17,6 +15,8 @@ public class Cliente {
     }
 
     private boolean cpfDigitosIguais(String cpf) {
+        // Retorna true se o cpf for composto de somente um dígito repetido 11 vezes
+
         for (int i = 1; i < 11; i++) {
             if (cpf.charAt(i) != cpf.charAt(i - 1)) {
                 return false;
@@ -26,6 +26,8 @@ public class Cliente {
     }
 
     private String digitosVerificadoresCPF(String cpf) {
+        // Calcula os digitos verificadores do cpf com base nos 9 primeiros números
+
         int total = 0;
         int atual;
         int resto;
@@ -35,7 +37,7 @@ public class Cliente {
             total += atual * (10 - i);
         }
         resto = total % 11;
-        if (resto == 0 || resto == 1) {
+        if (resto < 2) {
             primeiro_digito_verificador = 0;
         } else {
             primeiro_digito_verificador = 11 - resto;
@@ -50,14 +52,14 @@ public class Cliente {
         total += primeiro_digito_verificador * 2;
         resto = total % 11;
         int segundo_digito_verificador;
-        if (resto == 0 || resto == 1) {
+        if (resto < 2) {
             segundo_digito_verificador = 0;
         } else {
             segundo_digito_verificador = 11 - resto;
         }
 
         String resultado = Integer.toString(primeiro_digito_verificador)
-                .concat(Integer.toString(segundo_digito_verificador));
+                + (Integer.toString(segundo_digito_verificador));
 
         return resultado;
     }
@@ -124,7 +126,6 @@ public class Cliente {
     @Override
     public String toString() {
         return "Cliente [cpf = " + cpf + ", dataNascimento = " + dataNascimento + ", endereco = " + endereco
-                + ", idade = "
-                + idade + ", nome = " + nome + "]";
+                + ", idade = " + idade + ", nome = " + nome + "]";
     }
 }

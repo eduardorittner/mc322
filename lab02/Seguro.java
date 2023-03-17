@@ -1,4 +1,3 @@
-package lab02;
 
 public class Seguro {
     String nome;

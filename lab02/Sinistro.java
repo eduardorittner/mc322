@@ -1,4 +1,3 @@
-package lab02;
 
 import java.util.Random;
 
@@ -8,18 +7,18 @@ public class Sinistro {
     String endereco;
 
     public Sinistro(String data, String endereco) {
-        Random random = new Random();
-        this.id = random.nextInt();
         this.data = data;
         this.endereco = endereco;
+        setId();
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId() {
+        Random random = new Random();
+        this.id = random.nextInt();
     }
 
     public String getData() {
