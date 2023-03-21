@@ -65,15 +65,15 @@ public class Cliente {
     }
 
     public boolean validarCPF(String cpf) {
-        cpf = cpf.replaceAll("[^\\d]", "");
+        String aux_cpf = cpf.replaceAll("[^\\d]", "");
 
-        if (cpf.length() != 11) {
+        if (aux_cpf.length() != 11) {
             return false;
         }
-        if (cpfDigitosIguais(cpf)) {
+        if (cpfDigitosIguais(aux_cpf)) {
             return false;
         }
-        if (digitosVerificadoresCPF(cpf) == cpf.substring(10)) {
+        if (digitosVerificadoresCPF(aux_cpf) == aux_cpf.substring(10)) {
             return false;
         }
         return true;

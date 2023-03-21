@@ -1,4 +1,3 @@
-
 public class Seguro {
     String nome;
     String telefone;
