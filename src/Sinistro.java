@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.lang.Math;
 
 public class Sinistro {
     int id;
@@ -17,7 +18,7 @@ public class Sinistro {
 
     public void setId() {
         Random random = new Random();
-        this.id = random.nextInt();
+        this.id = Math.abs(random.nextInt()); // Queremos somente id positivos
     }
 
     public String getData() {

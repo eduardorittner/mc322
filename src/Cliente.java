@@ -73,9 +73,11 @@ public class Cliente {
         if (cpfDigitosIguais(aux_cpf)) {
             return false;
         }
-        if (digitosVerificadoresCPF(aux_cpf) == aux_cpf.substring(10)) {
+        boolean digitosVerificadoresDiferentes = !(digitosVerificadoresCPF(aux_cpf).equals(aux_cpf.substring(9)));
+        if (digitosVerificadoresDiferentes) {
             return false;
         }
+
         return true;
     }
 
