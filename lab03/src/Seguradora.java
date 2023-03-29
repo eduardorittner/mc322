@@ -16,6 +16,11 @@ public class Seguradora {
         this.endereco = endereco;
     }
 
+    public boolean cadastrarCliente(Cliente cliente) {
+        // Retornar false se tiver dado bosta? throw exception? nao sei
+        return true;
+    }
+
     public String getNome() {
         return nome;
     }
