@@ -15,8 +15,25 @@ public class Sinistro {
         this.seguradora = seguradora;
         this.veiculo = veiculo;
         this.cliente = cliente;
-        Random random = new Random();
-        this.id = Math.abs(random.nextInt()); // Queremos somente id positivos
+        this.id = criarId();
+    }
+
+    private int criarId() {
+        do {
+            Random random = new Random();
+            int id = Math.abs(random.nextInt()); // Queremos somente id positivos
+        } while (IdDuplicado(id));
+
+        return id;
+    }
+
+    private boolean IdDuplicado(int id) {
+        for (int i = 0; i < seguradora.getQuantidadeSinistros(); i++) {
+            if (seguradora.getSinistro(i).getId() == id) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public int getId() {

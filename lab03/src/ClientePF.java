@@ -7,16 +7,17 @@ public class ClientePF extends Cliente {
     private Date dataNascimento;
 
     public ClientePF(String nome, String cpf, Date dataLicenca, String educacao, String genero,
-            String classeEconomica, String endereco, ArrayList<Veiculo> veiculos, Date dataNascimento) {
+            String classeEconomica, String endereco, Date dataNascimento)
+            throws Exception {
 
-        super(nome, dataLicenca, educacao, genero, classeEconomica, endereco, veiculos);
+        super(nome, dataLicenca, educacao, genero, classeEconomica, endereco);
 
         this.dataNascimento = dataNascimento;
 
         if (validarCPF(cpf)) {
             this.cpf = cpf;
         } else {
-            this.cpf = "cpf invalido";
+            throw new Exception("Cpf inserido é inválido");
         }
     }
 

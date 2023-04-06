@@ -12,14 +12,15 @@ public class Cliente {
     ArrayList<Veiculo> veiculos;
 
     public Cliente(String nome, Date dataLicenca, String educacao, String genero,
-            String classeEconomica, String endereco, ArrayList<Veiculo> veiculos) {
+            String classeEconomica, String endereco) {
+        System.out.println("Construtora do cliente pai");
         this.nome = nome;
         this.dataLicenca = dataLicenca;
         this.educacao = educacao;
         this.genero = genero;
         this.classeEconomica = classeEconomica;
         this.endereco = endereco;
-        this.veiculos = veiculos;
+        this.veiculos = new ArrayList<Veiculo>();
     }
 
     public String getNome() {
@@ -72,10 +73,6 @@ public class Cliente {
 
     public ArrayList<Veiculo> getVeiculos() {
         return veiculos;
-    }
-
-    public void setVeiculos(ArrayList<Veiculo> veiculos) {
-        this.veiculos = veiculos;
     }
 
     @Override
