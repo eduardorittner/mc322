@@ -13,7 +13,6 @@ public class Cliente {
 
     public Cliente(String nome, Date dataLicenca, String educacao, String genero,
             String classeEconomica, String endereco) {
-        System.out.println("Construtora do cliente pai");
         this.nome = nome;
         this.dataLicenca = dataLicenca;
         this.educacao = educacao;

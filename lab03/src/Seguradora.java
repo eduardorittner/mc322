@@ -7,9 +7,7 @@ public class Seguradora {
     private String email;
     private String endereco;
     private ArrayList<Sinistro> listaSinistros;
-    private int quantidadeSinistros;
-    private ArrayList<Cliente> listaClientes;
-    private int quantidadeClientes;
+    private LinkedList<Cliente> listaClientes;
 
     public Seguradora(String nome, String telefone, String email, String endereco) {
         this.nome = nome;
@@ -17,13 +15,13 @@ public class Seguradora {
         this.email = email;
         this.endereco = endereco;
         this.listaSinistros = new ArrayList<Sinistro>();
-        this.listaClientes = new ArrayList<Cliente>();
+        this.listaClientes = new LinkedList<Cliente>();
     }
 
     public boolean cadastrarCliente(Cliente cliente) {
+        // Adicionar verificação se o cliente ja esta na lista
         try {
             listaClientes.add(cliente);
-            quantidadeClientes++;
             return true;
         } finally {
             return false;
@@ -32,10 +30,9 @@ public class Seguradora {
 
     public boolean removerCliente(String cliente) {
         try {
-            for (int i = 0; i < quantidadeClientes; i++) {
-                if (listaClientes.get(i).getNome() == cliente) {
-                    listaClientes.remove(i);
-                    quantidadeClientes--;
+            for (Cliente clienteAtual : listaClientes) {
+                if (clienteAtual.getNome().equals(cliente)) {
+                    listaClientes.remove(clienteAtual);
                     return true;
                 }
             }
@@ -44,8 +41,25 @@ public class Seguradora {
         }
     }
 
-    public String getNome() {
-        return nome;
+    public LinkedList<Cliente> listarClientes(String tipoCliente) {
+        LinkedList<Cliente> clientes = new LinkedList<Cliente>();
+        for (Cliente clienteAtual : listaClientes) {
+            // getCanonicalName retorna o nome da classe como uma string, que pode ser
+            // comparada diretamente com a string tipoCliente
+            if (clienteAtual.getClass().getCanonicalName().equals(tipoCliente)) {
+                clientes.add(clienteAtual);
+            }
+        }
+        return clientes;
+    }
+
+    public boolean limparClientes() {
+        try {
+            listaClientes.clear();
+            return true;
+        } finally {
+            return false;
+        }
     }
 
     public boolean gerarSinistro(String data, String endereco, Seguradora seguradora, Veiculo veiculo,
@@ -53,44 +67,39 @@ public class Seguradora {
         try {
             Sinistro novoSinistro = new Sinistro(data, endereco, seguradora, veiculo, cliente);
             listaSinistros.add(novoSinistro);
-            quantidadeSinistros++;
             return true;
         } finally {
             return false;
         }
     }
 
-    public Sinistro visualizarSinistro(String cliente) {
-        for (int i = 0; i < quantidadeSinistros; i++) {
+    public boolean visualizarSinistro(String cliente) {
+        // Tirar o : a implementação de Arraylist em java ja tem o
+        // tamanho e fornece iteradores
+        for (Sinistro sinistroAtual : listaSinistros) {
+            if (sinistroAtual.getCliente().equals(cliente)) {
+                System.out.println(sinistroAtual);
+                return true;
+            }
         }
+        return false;
     }
 
     public ArrayList<Sinistro> listarSinistros() {
         return listaSinistros;
     }
 
-    Sinistro getSinistro(int indice) {
-        return listaSinistros.get(indice);
+    public boolean limparSinistros() {
+        try {
+            listaSinistros.clear();
+            return true;
+        } finally {
+            return false;
+        }
     }
 
-    public void setListaSinistros(ArrayList<Sinistro> listaSinistros) {
-        this.listaSinistros = listaSinistros;
-    }
-
-    public int getQuantidadeSinistros() {
-        return quantidadeSinistros;
-    }
-
-    public void setQuantidadeSinistros(int quantidadeSinistros) {
-        this.quantidadeSinistros = quantidadeSinistros;
-    }
-
-    public ArrayList<Cliente> getListaClientes() {
-        return listaClientes;
-    }
-
-    public void setListaClientes(ArrayList<Cliente> listaClientes) {
-        this.listaClientes = listaClientes;
+    public String getNome() {
+        return nome;
     }
 
     public void setNome(String nome) {
