@@ -10,6 +10,7 @@ public class Sinistro {
     Seguradora seguradora;
     Veiculo veiculo;
     Cliente cliente;
+    static ArrayList<Integer> listaIds;
 
     public Sinistro(Date data, String endereco, Seguradora seguradora, Veiculo veiculo, Cliente cliente) {
         this.data = data;
@@ -26,13 +27,13 @@ public class Sinistro {
             int id = Math.abs(random.nextInt()); // Queremos somente id positivos
         } while (IdDuplicado(id));
 
+        listaIds.add(id);
         return id;
     }
 
     private boolean IdDuplicado(int id) {
-        ArrayList<Sinistro> sinistros = seguradora.listarSinistros();
-        for (Sinistro sinistroAtual : sinistros) {
-            if (sinistroAtual.getId() == id) {
+        for (int idAtual : listaIds) {
+            if (idAtual != id) {
                 return true;
             }
         }

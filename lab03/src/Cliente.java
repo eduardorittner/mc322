@@ -1,5 +1,6 @@
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.Scanner;
 
 public class Cliente {
 
@@ -20,6 +21,28 @@ public class Cliente {
         this.classeEconomica = classeEconomica;
         this.endereco = endereco;
         this.veiculos = new LinkedList<Veiculo>();
+    }
+
+    public static Cliente criarCliente() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Criando um novo Cliente");
+        System.out.println("Que tipo de cliente? pf/pj");
+        String tipo = scanner.next();
+        System.out.println("Nome: ");
+        String nome = scanner.next();
+        System.out.println("Educação: ");
+        String educacao = scanner.next();
+        System.out.println("Gênero: ");
+        String genero = scanner.next();
+        System.out.println("Classe econômica: ");
+        String classeEconomica = scanner.next();
+        System.out.println("Endereço: ");
+        String endereco = scanner.next();
+        System.out.println("Data da licença (xx/xx/xxxx): ");
+        String dataLicenca = scanner.next();
+        Date data = new Date();
+        Cliente cliente = new Cliente(nome, data, educacao, genero, classeEconomica, endereco);
+        return cliente;
     }
 
     public String getNome() {
