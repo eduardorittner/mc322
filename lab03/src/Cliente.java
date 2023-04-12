@@ -1,5 +1,5 @@
 import java.util.Date;
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Cliente {
 
@@ -9,7 +9,7 @@ public class Cliente {
     String genero;
     String classeEconomica;
     String endereco;
-    ArrayList<Veiculo> veiculos;
+    LinkedList<Veiculo> veiculos;
 
     public Cliente(String nome, Date dataLicenca, String educacao, String genero,
             String classeEconomica, String endereco) {
@@ -19,7 +19,7 @@ public class Cliente {
         this.genero = genero;
         this.classeEconomica = classeEconomica;
         this.endereco = endereco;
-        this.veiculos = new ArrayList<Veiculo>();
+        this.veiculos = new LinkedList<Veiculo>();
     }
 
     public String getNome() {
@@ -70,14 +70,33 @@ public class Cliente {
         this.endereco = endereco;
     }
 
-    public ArrayList<Veiculo> getVeiculos() {
+    public boolean cadastrarVeiculo(Veiculo veiculo) {
+        try {
+            veiculos.add(veiculo);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean removerVeiculo(String placa) {
+        for (Veiculo veiculoAtual : veiculos) {
+            if (veiculoAtual.getPlaca().equals(placa)) {
+                veiculos.remove(placa);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public LinkedList<Veiculo> listarVeiculos() {
         return veiculos;
     }
 
     @Override
     public String toString() {
-        return "Cliente [classeEconomica=" + classeEconomica + ", dataLicenca=" + dataLicenca
-                + ", educacao=" + educacao + ", endereco=" + endereco
-                + ", genero=" + genero + ", nome=" + nome + ", veiculos=" + veiculos + "]";
+        return "Cliente\nclasseEconomica: " + classeEconomica + "\ndataLicenca: " + dataLicenca
+                + "\neducacao: " + educacao + "\nendereco: " + endereco
+                + "\ngenero: " + genero + "\nnome: " + nome + "\nnumero de veiculos: " + veiculos.size();
     }
 }

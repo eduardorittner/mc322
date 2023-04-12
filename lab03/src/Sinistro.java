@@ -1,15 +1,17 @@
 import java.util.Random;
 import java.lang.Math;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class Sinistro {
     final int id;
-    String data;
+    Date data;
     String endereco;
     Seguradora seguradora;
     Veiculo veiculo;
     Cliente cliente;
 
-    public Sinistro(String data, String endereco, Seguradora seguradora, Veiculo veiculo, Cliente cliente) {
+    public Sinistro(Date data, String endereco, Seguradora seguradora, Veiculo veiculo, Cliente cliente) {
         this.data = data;
         this.endereco = endereco;
         this.seguradora = seguradora;
@@ -28,8 +30,9 @@ public class Sinistro {
     }
 
     private boolean IdDuplicado(int id) {
-        for (int i = 0; i < seguradora.getQuantidadeSinistros(); i++) {
-            if (seguradora.getSinistro(i).getId() == id) {
+        ArrayList<Sinistro> sinistros = seguradora.listarSinistros();
+        for (Sinistro sinistroAtual : sinistros) {
+            if (sinistroAtual.getId() == id) {
                 return true;
             }
         }
@@ -64,11 +67,11 @@ public class Sinistro {
         this.cliente = cliente;
     }
 
-    public String getData() {
+    public Date getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(Date data) {
         this.data = data;
     }
 
@@ -82,8 +85,8 @@ public class Sinistro {
 
     @Override
     public String toString() {
-        return "Sinistro [cliente=" + cliente + ", data=" + data + ", endereco=" + endereco + ", id=" + id
-                + ", seguradora=" + seguradora + ", veiculo=" + veiculo + "]";
+        return "[cliente: " + cliente + ", data: " + data + ", endereco: " + endereco + ", id: " + id
+                + ", seguradora: " + seguradora.getNome() + ", veiculo: " + veiculo.getPlaca() + "]";
     }
 
 }

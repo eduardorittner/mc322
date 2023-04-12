@@ -1,5 +1,6 @@
 import java.util.LinkedList;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Seguradora {
     private String nome;
@@ -23,7 +24,7 @@ public class Seguradora {
         try {
             listaClientes.add(cliente);
             return true;
-        } finally {
+        } catch (Exception e) {
             return false;
         }
     }
@@ -36,7 +37,8 @@ public class Seguradora {
                     return true;
                 }
             }
-        } finally {
+            return false;
+        } catch (Exception e) {
             return false;
         }
     }
@@ -57,25 +59,26 @@ public class Seguradora {
         try {
             listaClientes.clear();
             return true;
-        } finally {
+        } catch (Exception e) {
             return false;
         }
     }
 
-    public boolean gerarSinistro(String data, String endereco, Seguradora seguradora, Veiculo veiculo,
+    public boolean gerarSinistro(Date data, String endereco, Seguradora seguradora, Veiculo veiculo,
             Cliente cliente) {
-        try {
-            Sinistro novoSinistro = new Sinistro(data, endereco, seguradora, veiculo, cliente);
-            listaSinistros.add(novoSinistro);
-            return true;
-        } finally {
-            return false;
+        if (cliente.listarVeiculos().contains(veiculo)) {
+            try {
+                Sinistro novoSinistro = new Sinistro(data, endereco, seguradora, veiculo, cliente);
+                listaSinistros.add(novoSinistro);
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
         }
+        return false;
     }
 
     public boolean visualizarSinistro(String cliente) {
-        // Tirar o : a implementação de Arraylist em java ja tem o
-        // tamanho e fornece iteradores
         for (Sinistro sinistroAtual : listaSinistros) {
             if (sinistroAtual.getCliente().equals(cliente)) {
                 System.out.println(sinistroAtual);
@@ -93,7 +96,7 @@ public class Seguradora {
         try {
             listaSinistros.clear();
             return true;
-        } finally {
+        } catch (Exception e) {
             return false;
         }
     }
@@ -128,5 +131,12 @@ public class Seguradora {
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
+    }
+
+    @Override
+    public String toString() {
+        return "Seguradora\nNome: " + nome + "\nTelefone: " + telefone + "\nEndereco: " + endereco + "\nEmail: "
+                + email + "\nQuantidade de Clientes: " + listaClientes.size() + "\nQuantidade de Sinistros: "
+                + listaSinistros.size();
     }
 }

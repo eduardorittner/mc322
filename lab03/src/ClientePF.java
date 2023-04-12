@@ -102,7 +102,7 @@ public class ClientePF extends Cliente {
 
     @Override
     public String toString() {
-        return super.toString() + "cpf: " + cpf + "dataNascimento: " + dataNascimento;
+        return super.toString() + "\ncpf: " + cpf + "\ndataNascimento: " + dataNascimento;
     }
 
 }

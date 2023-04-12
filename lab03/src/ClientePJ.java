@@ -59,8 +59,6 @@ public class ClientePJ extends Cliente {
         String resultado = Integer.toString(primeiro_digito_verificador)
                 + (Integer.toString(segundo_digito_verificador));
 
-        System.out.println(resultado);
-
         return resultado;
     }
 
@@ -71,11 +69,10 @@ public class ClientePJ extends Cliente {
             return false;
         }
 
-        boolean digitosVerificadoresDiferentes = !(digitosVerificadoresCNPJ(aux_cnpj).equals(aux_cnpj.substring(11)));
+        boolean digitosVerificadoresDiferentes = !(digitosVerificadoresCNPJ(aux_cnpj).equals(aux_cnpj.substring(12)));
         if (digitosVerificadoresDiferentes) {
             return false;
         }
-        System.out.println(digitosVerificadoresCNPJ(aux_cnpj));
 
         return true;
     }
@@ -94,7 +91,7 @@ public class ClientePJ extends Cliente {
 
     @Override
     public String toString() {
-        return super.toString() + "cnpj=" + cnpj + ", dataFundacao=" + dataFundacao + "]";
+        return super.toString() + "\ncnpj: " + cnpj + "\ndataFundacao: " + dataFundacao;
     }
 
 }
