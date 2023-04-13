@@ -23,6 +23,7 @@ public class Seguradora {
         // Adicionar verificação se o cliente ja esta na lista
         try {
             listaClientes.add(cliente);
+            // Conferir se ja existe um cliente com esse cpf
             return true;
         } catch (Exception e) {
             return false;

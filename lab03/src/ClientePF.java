@@ -1,5 +1,7 @@
 import java.util.Date;
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.text.SimpleDateFormat;
 
 public class ClientePF extends Cliente {
 
@@ -18,6 +20,42 @@ public class ClientePF extends Cliente {
             this.cpf = cpf;
         } else {
             throw new Exception("Cpf inserido é inválido");
+        }
+    }
+
+    public static ClientePF criarCliente() {
+        while (true) {
+            try {
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("Criando um novo Cliente PF");
+                System.out.println("Que tipo de cliente? pf/pj");
+                String tipo = scanner.next();
+                System.out.println("Nome: ");
+                String nome = scanner.next();
+                System.out.println("Educação: ");
+                String educacao = scanner.next();
+                System.out.println("Gênero: ");
+                String genero = scanner.next();
+                System.out.println("Classe econômica: ");
+                String classeEconomica = scanner.next();
+                System.out.println("Endereço: ");
+                String endereco = scanner.next();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                System.out.println("Data da licença (dd-mm-aaaa): ");
+                String rawDataLicenca = scanner.next();
+                Date dataLicenca = dateFormat.parse(rawDataLicenca);
+                System.out.println("Cpf: ");
+                String cpf = scanner.next();
+                System.out.println("Data de nascimento (dd-mm-aaaa): ");
+                String rawDataNascimento = scanner.next();
+                Date dataNascimento = dateFormat.parse(rawDataNascimento);
+                ClientePF cliente = new ClientePF(nome, cpf, dataLicenca, educacao, genero, classeEconomica, endereco,
+                        dataNascimento);
+                return cliente;
+            } catch (Exception e) {
+                System.out.println(e);
+                System.out.println("Cpf digitado é invalido, tente novamente.");
+            }
         }
     }
 

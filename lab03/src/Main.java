@@ -1,4 +1,6 @@
+
 import java.util.Date;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -45,6 +47,7 @@ public class Main {
                         System.out.println(clientePJ);
                         System.out.println(veiculo1);
                         System.out.println(seguradora.visualizarSinistro("clientePF"));
+                        System.out.println(ClientePF.criarCliente());
 
                 } catch (Exception e) {
                         System.out.println(e);
