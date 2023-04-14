@@ -28,8 +28,6 @@ public class ClientePF extends Cliente {
             try {
                 Scanner scanner = new Scanner(System.in);
                 System.out.println("Criando um novo Cliente PF");
-                System.out.println("Que tipo de cliente? pf/pj");
-                String tipo = scanner.next();
                 System.out.println("Nome: ");
                 String nome = scanner.next();
                 System.out.println("Educação: ");
@@ -52,8 +50,9 @@ public class ClientePF extends Cliente {
                 ClientePF cliente = new ClientePF(nome, cpf, dataLicenca, educacao, genero, classeEconomica, endereco,
                         dataNascimento);
                 return cliente;
+            } catch (java.text.ParseException e) {
+                System.out.println("Data inserida possui formato inválido, tente novamente");
             } catch (Exception e) {
-                System.out.println(e);
                 System.out.println("Cpf digitado é invalido, tente novamente.");
             }
         }
@@ -118,7 +117,10 @@ public class ClientePF extends Cliente {
         if (cpfDigitosIguais(aux_cpf)) {
             return false;
         }
-        boolean digitosVerificadoresDiferentes = !(digitosVerificadoresCPF(aux_cpf).equals(aux_cpf.substring(9)));
+
+        String digitosVerificadoresOriginais = aux_cpf.substring(9);
+        String digitosVerificadoresCorretos = digitosVerificadoresCPF(aux_cpf);
+        boolean digitosVerificadoresDiferentes = !(digitosVerificadoresOriginais.equals(digitosVerificadoresCorretos));
         if (digitosVerificadoresDiferentes) {
             return false;
         }
@@ -134,8 +136,9 @@ public class ClientePF extends Cliente {
         this.dataNascimento = dataNascimento;
     }
 
-    public String getCpf(String cpf) {
-        return this.cpf;
+    @Override
+    public String getCadastroPessoal() {
+        return cpf;
     }
 
     @Override

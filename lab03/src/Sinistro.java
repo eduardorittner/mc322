@@ -10,7 +10,7 @@ public class Sinistro {
     Seguradora seguradora;
     Veiculo veiculo;
     Cliente cliente;
-    static ArrayList<Integer> listaIds;
+    static ArrayList<Integer> listaIds = new ArrayList<Integer>();
 
     public Sinistro(Date data, String endereco, Seguradora seguradora, Veiculo veiculo, Cliente cliente) {
         this.data = data;
@@ -32,10 +32,8 @@ public class Sinistro {
     }
 
     private boolean IdDuplicado(int id) {
-        for (int idAtual : listaIds) {
-            if (idAtual != id) {
-                return true;
-            }
+        if (listaIds.contains(id)) {
+            return true;
         }
         return false;
     }
@@ -86,7 +84,8 @@ public class Sinistro {
 
     @Override
     public String toString() {
-        return "[cliente: " + cliente + ", data: " + data + ", endereco: " + endereco + ", id: " + id
+        return "[cliente: " + cliente.getCadastroPessoal() + ", data: " + data + ", endereco: " + endereco + ", id: "
+                + id
                 + ", seguradora: " + seguradora.getNome() + ", veiculo: " + veiculo.getPlaca() + "]";
     }
 

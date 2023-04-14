@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Date;
-import java.io.IOException;
+import java.util.Scanner;
+import java.text.SimpleDateFormat;
 
 public class ClientePJ extends Cliente {
 
@@ -12,13 +13,48 @@ public class ClientePJ extends Cliente {
             throws Exception {
 
         super(nome, dataLicenca, educacao, genero, classeEconomica, endereco);
+        this.dataFundacao = dataFundacao;
 
         if (validarCNPJ(cnpj)) {
             this.cnpj = cnpj;
         } else {
             throw new Exception("O cnpj inserido não é válido.");
         }
-        this.dataFundacao = dataFundacao;
+    }
+
+    public static ClientePJ criarCliente() {
+        while (true) {
+            try {
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("Criando um novo Cliente PF");
+                System.out.println("Nome: ");
+                String nome = scanner.next();
+                System.out.println("Educação: ");
+                String educacao = scanner.next();
+                System.out.println("Gênero: ");
+                String genero = scanner.next();
+                System.out.println("Classe econômica: ");
+                String classeEconomica = scanner.next();
+                System.out.println("Endereço: ");
+                String endereco = scanner.next();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                System.out.println("Data de licença (dd-mm-aaaa): ");
+                String rawDataLicenca = scanner.next();
+                Date dataLicenca = dateFormat.parse(rawDataLicenca);
+                System.out.println("Cnpj ");
+                String cnpj = scanner.next();
+                System.out.println("Data de fundação (dd-mm-aaaa): ");
+                String rawDataFundacao = scanner.next();
+                Date dataFundacao = dateFormat.parse(rawDataFundacao);
+                ClientePJ cliente = new ClientePJ(nome, dataLicenca, educacao, genero, classeEconomica, endereco,
+                        dataFundacao, cnpj);
+                return cliente;
+            } catch (java.text.ParseException e) {
+                System.out.println("Data inserida possui formato inválido, tente novamente");
+            } catch (Exception e) {
+                System.out.println("Cpf digitado é invalido, tente novamente.");
+            }
+        }
     }
 
     private String digitosVerificadoresCNPJ(String cnpj) {
@@ -69,7 +105,9 @@ public class ClientePJ extends Cliente {
             return false;
         }
 
-        boolean digitosVerificadoresDiferentes = !(digitosVerificadoresCNPJ(aux_cnpj).equals(aux_cnpj.substring(12)));
+        String digitosVerificadoresOriginais = aux_cnpj.substring(12);
+        String digitosVerificadoresCorretos = digitosVerificadoresCNPJ(aux_cnpj);
+        boolean digitosVerificadoresDiferentes = !(digitosVerificadoresOriginais.equals(digitosVerificadoresCorretos));
         if (digitosVerificadoresDiferentes) {
             return false;
         }
@@ -77,7 +115,8 @@ public class ClientePJ extends Cliente {
         return true;
     }
 
-    public String getCnpj() {
+    @Override
+    public String getCadastroPessoal() {
         return cnpj;
     }
 

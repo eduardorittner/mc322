@@ -20,28 +20,24 @@ public class Seguradora {
     }
 
     public boolean cadastrarCliente(Cliente cliente) {
-        // Adicionar verificação se o cliente ja esta na lista
-        try {
-            listaClientes.add(cliente);
-            // Conferir se ja existe um cliente com esse cpf
-            return true;
-        } catch (Exception e) {
-            return false;
+        // Confirma se não existe nenhum cliente com o mesmo cpf ou cnpj já cadastrado
+        for (Cliente clienteAtual : listaClientes) {
+            if (cliente.getCadastroPessoal().equals(clienteAtual.getCadastroPessoal())) {
+                return false;
+            }
         }
+        listaClientes.add(cliente);
+        return true;
     }
 
     public boolean removerCliente(String cliente) {
-        try {
-            for (Cliente clienteAtual : listaClientes) {
-                if (clienteAtual.getNome().equals(cliente)) {
-                    listaClientes.remove(clienteAtual);
-                    return true;
-                }
+        for (Cliente clienteAtual : listaClientes) {
+            if (clienteAtual.getNome().equals(cliente)) {
+                listaClientes.remove(clienteAtual);
+                return true;
             }
-            return false;
-        } catch (Exception e) {
-            return false;
         }
+        return false;
     }
 
     public LinkedList<Cliente> listarClientes(String tipoCliente) {
@@ -57,26 +53,22 @@ public class Seguradora {
     }
 
     public boolean limparClientes() {
-        try {
-            listaClientes.clear();
-            return true;
-        } catch (Exception e) {
+        // Não limpa uma lista vazia
+        if (listaClientes.isEmpty()) {
             return false;
         }
+        listaClientes.clear();
+        return true;
     }
 
     public boolean gerarSinistro(Date data, String endereco, Seguradora seguradora, Veiculo veiculo,
             Cliente cliente) {
-        if (cliente.listarVeiculos().contains(veiculo)) {
-            try {
-                Sinistro novoSinistro = new Sinistro(data, endereco, seguradora, veiculo, cliente);
-                listaSinistros.add(novoSinistro);
-                return true;
-            } catch (Exception e) {
-                return false;
-            }
+        if (!cliente.listarVeiculos().contains(veiculo)) {
+            return false;
         }
-        return false;
+        Sinistro novoSinistro = new Sinistro(data, endereco, seguradora, veiculo, cliente);
+        listaSinistros.add(novoSinistro);
+        return true;
     }
 
     public boolean visualizarSinistro(String cliente) {
@@ -94,12 +86,11 @@ public class Seguradora {
     }
 
     public boolean limparSinistros() {
-        try {
-            listaSinistros.clear();
-            return true;
-        } catch (Exception e) {
+        if (listaSinistros.isEmpty()) {
             return false;
         }
+        listaSinistros.clear();
+        return true;
     }
 
     public String getNome() {

@@ -94,6 +94,12 @@ public class Cliente {
         return veiculos;
     }
 
+    public String getCadastroPessoal() {
+        // Método genérico para ser sobreescrito pelas classes herdeiras, equivale a
+        // pedir o CPF ou CNPJ, dependendo do tipo de cliente
+        return "";
+    }
+
     @Override
     public String toString() {
         return "Cliente\nclasseEconomica: " + classeEconomica + "\ndataLicenca: " + dataLicenca

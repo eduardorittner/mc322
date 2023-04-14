@@ -1,14 +1,19 @@
+/*
+ * Arquivo de teste de todas as classes e métodos do lab03
+ */
 
 import java.util.Date;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
+import java.text.SimpleDateFormat;
 
 public class Main {
         public static void main(String[] args) {
 
                 try {
+                        Scanner scanner = new Scanner(System.in);
+
                         // Data usada para todos os parâmetros do tipo "Date"
                         Date data = new Date();
 
@@ -42,12 +47,22 @@ public class Main {
                         // Removendo um cliente
                         seguradora.removerCliente("outro nome");
 
+                        System.out.println("-------------------");
                         System.out.println(seguradora);
+                        System.out.println("-------------------");
                         System.out.println(clientePF);
+                        System.out.println("-------------------");
                         System.out.println(clientePJ);
+                        System.out.println("-------------------");
                         System.out.println(veiculo1);
+                        System.out.println("-------------------");
                         System.out.println(seguradora.visualizarSinistro("clientePF"));
-                        System.out.println(ClientePF.criarCliente());
+                        System.out.println("-------------------");
+                        System.out.println("Quer criar um novo cliente? y/n");
+                        if (scanner.next().equals("y")) {
+                                System.out.println(ClientePF.criarCliente());
+                        }
+                        System.out.println("---------------");
 
                 } catch (Exception e) {
                         System.out.println(e);
