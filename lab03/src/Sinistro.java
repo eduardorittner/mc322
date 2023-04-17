@@ -22,9 +22,10 @@ public class Sinistro {
     }
 
     private int criarId() {
+        int id;
+        Random random = new Random();
         do {
-            Random random = new Random();
-            int id = Math.abs(random.nextInt()); // Queremos somente id positivos
+            id = Math.abs(random.nextInt()); // Queremos somente id positivos
         } while (IdDuplicado(id));
 
         listaIds.add(id);
@@ -84,9 +85,8 @@ public class Sinistro {
 
     @Override
     public String toString() {
-        return "[cliente: " + cliente.getCadastroPessoal() + ", data: " + data + ", endereco: " + endereco + ", id: "
-                + id
-                + ", seguradora: " + seguradora.getNome() + ", veiculo: " + veiculo.getPlaca() + "]";
+        return "Sinistro " + id + " [cliente: " + cliente.getCadastroPessoal() + ", data: " + data + ", endereco: "
+                + endereco + ", seguradora: " + seguradora.getNome() + ", veiculo: " + veiculo.getPlaca() + "]";
     }
 
 }

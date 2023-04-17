@@ -25,13 +25,13 @@ public class ClientePJ extends Cliente {
         while (true) {
             try {
                 Scanner scanner = new Scanner(System.in);
-                System.out.println("Criando um novo Cliente PF");
+                System.out.println("Criando um novo Cliente PJ");
                 System.out.println("Nome: ");
                 String nome = scanner.next();
                 System.out.println("Endereço: ");
                 String endereco = scanner.next();
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                System.out.println("Cnpj ");
+                System.out.println("Cnpj: ");
                 String cnpj = scanner.next();
                 System.out.println("Data de fundação (dd-mm-aaaa): ");
                 String rawDataFundacao = scanner.next();

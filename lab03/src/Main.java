@@ -50,22 +50,116 @@ public class Main {
                         System.out.println(seguradora);
                         System.out.println("-------------------");
                         System.out.println(clientePF);
+                        System.out.println("CPF é valido? " + clientePF.validarCPF(clientePF.getCadastroPessoal()));
                         System.out.println("-------------------");
                         System.out.println(clientePJ);
+                        System.out.println("CNPJ é valido? " + clientePJ.validarCNPJ(clientePJ.getCadastroPessoal()));
                         System.out.println("-------------------");
                         System.out.println(veiculo1);
                         System.out.println("-------------------");
-                        System.out.println(seguradora.visualizarSinistro("clientePF"));
+                        seguradora.visualizarSinistro("outro nome");
                         System.out.println("-------------------");
-                        System.out.println("Quer criar um novo cliente? y/n");
-                        if (scanner.next().equals("y")) {
-                                System.out.println(ClientePF.criarCliente());
-                        }
+                        // System.out.println("Quer criar um novo cliente? y/n");
+
+                        // if (scanner.next().equals("y")) {
+
+                        // System.out.println("Que tipo? PF/PJ");
+                        // String tipoCliente = scanner.next();
+                        // if (tipoCliente.equals("PF")) {
+                        // System.out.println(ClientePF.criarCliente());
+                        // } else if (tipoCliente.equals("PJ")) {
+                        // System.out.println(ClientePJ.criarCliente());
+                        // }
+
+                        // }
+                        menuSeguradora(seguradora);
                         System.out.println("---------------");
 
-                } catch (Exception e) {
+                } catch (
+
+                Exception e) {
                         System.out.println(e);
                 }
         }
 
+        public static void menuSeguradora(Seguradora seguradora) {
+                Scanner scanner = new Scanner(System.in);
+
+                while (true) {
+                        System.out.println("O que você gostaria de fazer?");
+                        System.out.println("1: Visão geral da seguradora");
+                        System.out.println("2: Visão geral dos clientes");
+                        System.out.println("3: Visão geral dos sinistros");
+                        System.out.println("4: Visualizar um cliente específico");
+                        System.out.println("5: Visualizar um sinistro específico");
+                        System.out.println("6: Adicionar um cliente");
+                        System.out.println("7: Remover um cliente");
+                        System.out.println("8: Sair");
+
+                        String escolha = scanner.next();
+                        switch (escolha) {
+                                case "1":
+                                        System.out.println(seguradora);
+                                        break;
+                                case "2":
+                                        System.out.println("Que tipo de cliente? PF/PJ");
+                                        String tipoCliente = scanner.next();
+                                        switch (tipoCliente) {
+                                                case "PF":
+                                                        System.out.println(seguradora.listarClientes("ClientePF"));
+                                                        break;
+                                                case "PJ":
+                                                        System.out.println(seguradora.listarClientes("ClientePJ"));
+                                                        break;
+                                                default:
+                                                        System.out.println("Tipo de cliente inválido");
+                                        }
+                                        break;
+                                case "3":
+                                        System.out.println(seguradora.listarSinistros());
+                                        break;
+                                case "4":
+                                        System.out.println("Que cliente você gostaria de visualizar?");
+                                        String cliente = scanner.next();
+                                        if (!seguradora.visualizarCliente(cliente)) {
+                                                System.out.println("Não existe um cliente com este nome");
+                                        }
+                                        break;
+                                case "5":
+                                        System.out.println("Que sinistro você gostaria de visualizar?");
+                                        String sinistro = scanner.next();
+                                        if (!seguradora.visualizarSinistro(sinistro)) {
+                                                System.out.println("Não existe um sinistro com este nome");
+                                        }
+                                        break;
+                                case "6":
+                                        System.out.println("Que tipo de cliente você gostaria de cadastrar?");
+                                        tipoCliente = scanner.next();
+                                        Cliente novoCliente;
+                                        switch (tipoCliente) {
+                                                case "PF":
+                                                        novoCliente = ClientePF.criarCliente();
+                                                        seguradora.cadastrarCliente(novoCliente);
+                                                        break;
+                                                case "PJ":
+                                                        novoCliente = ClientePJ.criarCliente();
+                                                        seguradora.cadastrarCliente(novoCliente);
+                                                        break;
+                                                default:
+                                                        System.out.println("Tipo de cliente inválido");
+                                        }
+                                        break;
+                                case "7":
+                                        System.out.println("Que cliente você gostaria de remover?");
+                                        String clienteRemovido = scanner.next();
+                                        seguradora.removerCliente(clienteRemovido);
+                                        break;
+                                case "8":
+                                        return;
+                                default:
+                                        System.out.println("Opção inválida");
+
+                        }
+                }
+        }
 }

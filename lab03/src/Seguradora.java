@@ -52,6 +52,16 @@ public class Seguradora {
         return clientes;
     }
 
+    public boolean visualizarCliente(String cliente) {
+        for (Cliente clienteAtual : listaClientes) {
+            if (clienteAtual.getNome().equals(cliente)) {
+                System.out.println(clienteAtual);
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean limparClientes() {
         // Não limpa uma lista vazia
         if (listaClientes.isEmpty()) {
@@ -73,7 +83,7 @@ public class Seguradora {
 
     public boolean visualizarSinistro(String cliente) {
         for (Sinistro sinistroAtual : listaSinistros) {
-            if (sinistroAtual.getCliente().equals(cliente)) {
+            if (sinistroAtual.getCliente().getNome().equals(cliente)) {
                 System.out.println(sinistroAtual);
                 return true;
             }
