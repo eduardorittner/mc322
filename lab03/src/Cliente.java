@@ -5,20 +5,11 @@ import java.util.Scanner;
 public class Cliente {
 
     String nome;
-    Date dataLicenca;
-    String educacao;
-    String genero;
-    String classeEconomica;
     String endereco;
     LinkedList<Veiculo> veiculos;
 
-    public Cliente(String nome, Date dataLicenca, String educacao, String genero,
-            String classeEconomica, String endereco) {
+    public Cliente(String nome, String endereco) {
         this.nome = nome;
-        this.dataLicenca = dataLicenca;
-        this.educacao = educacao;
-        this.genero = genero;
-        this.classeEconomica = classeEconomica;
         this.endereco = endereco;
         this.veiculos = new LinkedList<Veiculo>();
     }
@@ -29,38 +20,6 @@ public class Cliente {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public Date getDataLicenca() {
-        return dataLicenca;
-    }
-
-    public void setDataLicenca(Date dataLicenca) {
-        this.dataLicenca = dataLicenca;
-    }
-
-    public String getEducacao() {
-        return educacao;
-    }
-
-    public void setEducacao(String educacao) {
-        this.educacao = educacao;
-    }
-
-    public String getGenero() {
-        return genero;
-    }
-
-    public void setGenero(String genero) {
-        this.genero = genero;
-    }
-
-    public String getClasseEconomica() {
-        return classeEconomica;
-    }
-
-    public void setClasseEconomica(String classeEconomica) {
-        this.classeEconomica = classeEconomica;
     }
 
     public String getEndereco() {
@@ -102,8 +61,7 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente\nclasseEconomica: " + classeEconomica + "\ndataLicenca: " + dataLicenca
-                + "\neducacao: " + educacao + "\nendereco: " + endereco
-                + "\ngenero: " + genero + "\nnome: " + nome + "\nnumero de veiculos: " + veiculos.size();
+        return "Cliente\nendereco: " + endereco
+                + "\nnome: " + nome + "\nnumero de veiculos: " + veiculos.size();
     }
 }

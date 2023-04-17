@@ -24,8 +24,7 @@ public class Main {
                         ClientePF clientePF = new ClientePF("nome", "458.789.318-85", data, "educacao", "genero",
                                         "classeEconomica", "endereco", data);
 
-                        ClientePJ clientePJ = new ClientePJ("outro nome", data, "educacao", "genero", "classeEconomica",
-                                        "endereco", data, "11.444.777/0001-61.");
+                        ClientePJ clientePJ = new ClientePJ("outro nome", "endereco", data, "11.444.777/0001-61.");
 
                         // Instanciação dos veículos
                         Veiculo veiculo1 = new Veiculo("placa", "marca", "modelo", 2000);

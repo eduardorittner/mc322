@@ -6,14 +6,25 @@ import java.text.SimpleDateFormat;
 public class ClientePF extends Cliente {
 
     private final String cpf;
+    private String genero;
+    private Date dataLicenca;
+    private String educacao;
+    private Seguradora seguradora;
+    private Veiculo veiculo;
+    private String classeEconomica;
     private Date dataNascimento;
 
     public ClientePF(String nome, String cpf, Date dataLicenca, String educacao, String genero,
             String classeEconomica, String endereco, Date dataNascimento)
             throws Exception {
 
-        super(nome, dataLicenca, educacao, genero, classeEconomica, endereco);
+        super(nome, endereco);
 
+        this.dataLicenca = dataLicenca;
+        this.educacao = educacao;
+        this.genero = genero;
+        this.classeEconomica = classeEconomica;
+        this.endereco = endereco;
         this.dataNascimento = dataNascimento;
 
         if (validarCPF(cpf)) {
@@ -21,6 +32,58 @@ public class ClientePF extends Cliente {
         } else {
             throw new Exception("Cpf inserido é inválido");
         }
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    public Date getDataLicenca() {
+        return dataLicenca;
+    }
+
+    public void setDataLicenca(Date dataLicenca) {
+        this.dataLicenca = dataLicenca;
+    }
+
+    public String getEducacao() {
+        return educacao;
+    }
+
+    public void setEducacao(String educacao) {
+        this.educacao = educacao;
+    }
+
+    public Seguradora getSeguradora() {
+        return seguradora;
+    }
+
+    public void setSeguradora(Seguradora seguradora) {
+        this.seguradora = seguradora;
+    }
+
+    public Veiculo getVeiculo() {
+        return veiculo;
+    }
+
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculo = veiculo;
+    }
+
+    public String getClasseEconomica() {
+        return classeEconomica;
+    }
+
+    public void setClasseEconomica(String classeEconomica) {
+        this.classeEconomica = classeEconomica;
     }
 
     public static ClientePF criarCliente() {

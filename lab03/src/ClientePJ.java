@@ -8,11 +8,10 @@ public class ClientePJ extends Cliente {
     private final String cnpj;
     private Date dataFundacao;
 
-    public ClientePJ(String nome, Date dataLicenca, String educacao, String genero,
-            String classeEconomica, String endereco, Date dataFundacao, String cnpj)
+    public ClientePJ(String nome, String endereco, Date dataFundacao, String cnpj)
             throws Exception {
 
-        super(nome, dataLicenca, educacao, genero, classeEconomica, endereco);
+        super(nome, endereco);
         this.dataFundacao = dataFundacao;
 
         if (validarCNPJ(cnpj)) {
@@ -29,25 +28,15 @@ public class ClientePJ extends Cliente {
                 System.out.println("Criando um novo Cliente PF");
                 System.out.println("Nome: ");
                 String nome = scanner.next();
-                System.out.println("Educação: ");
-                String educacao = scanner.next();
-                System.out.println("Gênero: ");
-                String genero = scanner.next();
-                System.out.println("Classe econômica: ");
-                String classeEconomica = scanner.next();
                 System.out.println("Endereço: ");
                 String endereco = scanner.next();
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                System.out.println("Data de licença (dd-mm-aaaa): ");
-                String rawDataLicenca = scanner.next();
-                Date dataLicenca = dateFormat.parse(rawDataLicenca);
                 System.out.println("Cnpj ");
                 String cnpj = scanner.next();
                 System.out.println("Data de fundação (dd-mm-aaaa): ");
                 String rawDataFundacao = scanner.next();
                 Date dataFundacao = dateFormat.parse(rawDataFundacao);
-                ClientePJ cliente = new ClientePJ(nome, dataLicenca, educacao, genero, classeEconomica, endereco,
-                        dataFundacao, cnpj);
+                ClientePJ cliente = new ClientePJ(nome, endereco, dataFundacao, cnpj);
                 return cliente;
             } catch (java.text.ParseException e) {
                 System.out.println("Data inserida possui formato inválido, tente novamente");
