@@ -11,6 +11,8 @@ public class Sinistro {
     Veiculo veiculo;
     Cliente cliente;
     static ArrayList<Integer> listaIds = new ArrayList<Integer>();
+    // As operações mais realizadas na listaIds são de adição no fim do vetor e
+    // iteração sobre o mesmo, sendo assim, um array é mais eficiente
 
     public Sinistro(Date data, String endereco, Seguradora seguradora, Veiculo veiculo, Cliente cliente) {
         this.data = data;

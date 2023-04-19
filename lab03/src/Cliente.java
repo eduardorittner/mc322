@@ -1,17 +1,18 @@
+import java.util.Scanner;
 import java.util.Date;
 import java.util.LinkedList;
-import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Cliente {
 
     String nome;
     String endereco;
-    LinkedList<Veiculo> veiculos;
+    ArrayList<Veiculo> veiculos;
 
     public Cliente(String nome, String endereco) {
         this.nome = nome;
         this.endereco = endereco;
-        this.veiculos = new LinkedList<Veiculo>();
+        this.veiculos = new ArrayList<Veiculo>();
     }
 
     public String getNome() {
@@ -49,7 +50,7 @@ public class Cliente {
         return false;
     }
 
-    public LinkedList<Veiculo> listarVeiculos() {
+    public ArrayList<Veiculo> listarVeiculos() {
         return veiculos;
     }
 

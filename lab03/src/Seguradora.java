@@ -1,4 +1,3 @@
-import java.util.LinkedList;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -8,7 +7,7 @@ public class Seguradora {
     private String email;
     private String endereco;
     private ArrayList<Sinistro> listaSinistros;
-    private LinkedList<Cliente> listaClientes;
+    private ArrayList<Cliente> listaClientes;
 
     public Seguradora(String nome, String telefone, String email, String endereco) {
         this.nome = nome;
@@ -16,7 +15,7 @@ public class Seguradora {
         this.email = email;
         this.endereco = endereco;
         this.listaSinistros = new ArrayList<Sinistro>();
-        this.listaClientes = new LinkedList<Cliente>();
+        this.listaClientes = new ArrayList<Cliente>();
     }
 
     public boolean cadastrarCliente(Cliente cliente) {
@@ -40,8 +39,8 @@ public class Seguradora {
         return false;
     }
 
-    public LinkedList<Cliente> listarClientes(String tipoCliente) {
-        LinkedList<Cliente> clientes = new LinkedList<Cliente>();
+    public ArrayList<Cliente> listarClientes(String tipoCliente) {
+        ArrayList<Cliente> clientes = new ArrayList<Cliente>();
         for (Cliente clienteAtual : listaClientes) {
             // getCanonicalName retorna o nome da classe como uma string, que pode ser
             // comparada diretamente com a string tipoCliente

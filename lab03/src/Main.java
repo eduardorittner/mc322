@@ -2,10 +2,8 @@
  * Arquivo de teste de todas as classes e métodos do lab03
  */
 
-import java.util.Date;
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.Date;
 import java.text.SimpleDateFormat;
 
 public class Main {
@@ -24,7 +22,7 @@ public class Main {
                         ClientePF clientePF = new ClientePF("nome", "458.789.318-85", data, "educacao", "genero",
                                         "classeEconomica", "endereco", data);
 
-                        ClientePJ clientePJ = new ClientePJ("outro nome", "endereco", data, "11.444.777/0001-61.");
+                        ClientePJ clientePJ = new ClientePJ("outro nome", "endereco", data, "11.444.777/0001-61");
 
                         // Instanciação dos veículos
                         Veiculo veiculo1 = new Veiculo("placa", "marca", "modelo", 2000);
@@ -59,19 +57,7 @@ public class Main {
                         System.out.println("-------------------");
                         seguradora.visualizarSinistro("outro nome");
                         System.out.println("-------------------");
-                        // System.out.println("Quer criar um novo cliente? y/n");
-
-                        // if (scanner.next().equals("y")) {
-
-                        // System.out.println("Que tipo? PF/PJ");
-                        // String tipoCliente = scanner.next();
-                        // if (tipoCliente.equals("PF")) {
-                        // System.out.println(ClientePF.criarCliente());
-                        // } else if (tipoCliente.equals("PJ")) {
-                        // System.out.println(ClientePJ.criarCliente());
-                        // }
-
-                        // }
+                        System.out.println("Menu da seguradora");
                         menuSeguradora(seguradora);
                         System.out.println("---------------");
 
@@ -155,10 +141,16 @@ public class Main {
                                         seguradora.removerCliente(clienteRemovido);
                                         break;
                                 case "8":
+                                        System.out.println("Progama finalizado");
                                         return;
                                 default:
                                         System.out.println("Opção inválida");
 
+                        }
+                        System.out.println("Mais uma operação? y/n");
+                        String resposta = scanner.next();
+                        if (resposta.equals("n")) {
+                                return;
                         }
                 }
         }
