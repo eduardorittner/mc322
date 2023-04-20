@@ -16,6 +16,7 @@ public class ClientePJ extends Cliente {
         if (validarCNPJ(cnpj)) {
             this.cnpj = cnpj;
         } else {
+            // Se o CNPJ não for válido, o cliente não é instanciado
             throw new Exception("O cnpj inserido não é válido.");
         }
     }

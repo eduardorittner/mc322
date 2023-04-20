@@ -29,6 +29,7 @@ public class ClientePF extends Cliente {
         if (validarCPF(cpf)) {
             this.cpf = cpf;
         } else {
+            // Se o CPF não for válido, o cliente não é instanciado
             throw new Exception("Cpf inserido é inválido");
         }
     }
