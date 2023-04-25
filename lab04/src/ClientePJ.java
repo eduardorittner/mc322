@@ -7,8 +7,7 @@ public class ClientePJ extends Cliente {
     private final String cnpj;
     private Date dataFundacao;
 
-    public ClientePJ(String nome, String endereco, Date dataFundacao, String cnpj)
-            throws Exception {
+    public ClientePJ(String nome, String endereco, Date dataFundacao, String cnpj) throws Exception {
 
         super(nome, endereco);
         this.dataFundacao = dataFundacao;
@@ -29,9 +28,9 @@ public class ClientePJ extends Cliente {
                 String nome = scanner.next();
                 System.out.println("Endereço: ");
                 String endereco = scanner.next();
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
                 System.out.println("Cnpj: ");
                 String cnpj = scanner.next();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
                 System.out.println("Data de fundação (dd-mm-aaaa): ");
                 String rawDataFundacao = scanner.next();
                 Date dataFundacao = dateFormat.parse(rawDataFundacao);

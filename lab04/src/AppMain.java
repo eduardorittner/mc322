@@ -4,6 +4,6 @@ import java.text.SimpleDateFormat;
 
 public class AppMain {
         public static void main(String[] args) {
-                System.out.println(Menu.CADASTRAR);
+                System.out.println(Operacao.getEnum(2));
         }
 }
