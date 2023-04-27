@@ -53,6 +53,10 @@ public class Seguradora {
         return false;
     }
 
+    public ArrayList<Cliente> getListaClientes() {
+        return listaClientes;
+    }
+
     public ArrayList<Cliente> listarClientes(String tipoCliente) {
         ArrayList<Cliente> clientes = new ArrayList<Cliente>();
         for (Cliente clienteAtual : listaClientes) {
@@ -84,7 +88,7 @@ public class Seguradora {
         return true;
     }
 
-    private Cliente getCliente(String id) {
+    public Cliente getCliente(String id) {
         for (Cliente cliente : listaClientes) {
             if (cliente.getCadastroPessoal().equals(id)) {
                 return cliente;
@@ -93,35 +97,12 @@ public class Seguradora {
         return null;
     }
 
-    public boolean cadastrarSinistro(Scanner scanner, SimpleDateFormat dateScanner) {
-        System.out.println("Data: ");
-        try {
-            Date data = dateScanner.parse(scanner.next());
-            System.out.println("ID do cliente: ");
-            String id = scanner.next();
-            Cliente cliente = getCliente(id);
-            System.out.println("Placa do veículo: ");
-            String placa = scanner.next();
-            Veiculo veiculo = cliente.encontrarVeiculo(placa);
-            if (!gerarSinistro(data, endereco, veiculo, cliente)) {
-                return false;
-            }
-            return true;
-        } catch (Exception e) {
+    public boolean cadastrarSinistro(Sinistro sinistro) {
+        if (sinistro.equals(null)) {
             return false;
         }
-    }
-
-    public boolean gerarSinistro(Date data, String endereco, Veiculo veiculo, Cliente cliente) {
-        if (!cliente.listarVeiculos().contains(veiculo)) {
-            return false;
-        }
-        if (!listaClientes.contains(cliente)) {
-            return false;
-        }
-        Sinistro novoSinistro = new Sinistro(data, endereco, this, veiculo, cliente);
-        listaSinistros.add(novoSinistro);
-        return true;
+        listaSinistros.add(sinistro);
+        return false;
     }
 
     public boolean visualizarSinistro(String cliente) {

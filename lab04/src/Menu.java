@@ -104,7 +104,7 @@ public class Menu {
                 break;
 
             case GERAR_SINISTRO:
-                seguradoraAtual.cadastrarSinistro(scanner, dateScanner);
+                seguradoraAtual.cadastrarSinistro(Construtor.criarSinistro(seguradoraAtual));
 
             case CALCULAR_RECEITA:
 

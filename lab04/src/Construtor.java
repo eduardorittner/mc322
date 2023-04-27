@@ -62,13 +62,50 @@ public class Construtor {
         }
     }
 
-    // public static Seguradora criarSeguradora() {
-    // }
+    public static Seguradora criarSeguradora() {
+        System.out.println("Nome: ");
+        String nome = scanner.next();
+        System.out.println("Telefone: ");
+        String telefone = scanner.next();
+        System.out.println("Email: ");
+        String email = scanner.next();
+        System.out.println("Endereco: ");
+        String endereco = scanner.next();
+        Seguradora seguradora = new Seguradora(nome, telefone, email, endereco);
+        return seguradora;
+    }
 
-    // public static Sinistro criarSinistro() {
-    // }
+    public static Sinistro criarSinistro(Seguradora seguradora) {
+        try {
+            System.out.println("Data: ");
+            Date data = dateScanner.parse(scanner.next());
+            System.out.println("Endereco: ");
+            String endereco = scanner.next();
+            System.out.println("Id do cliente: ");
+            Cliente cliente = seguradora.getCliente(scanner.next());
+            System.out.println("Placa do veiculo: ");
+            Veiculo veiculo = cliente.getVeiculo(scanner.next());
+            if (!cliente.listarVeiculos().contains(veiculo) || !seguradora.getListaClientes().contains(cliente)) {
+                return null;
+            }
+            Sinistro sinistro = new Sinistro(data, endereco, seguradora, veiculo, cliente);
+            return sinistro;
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
-    // public static Veiculo criarVeiculo() {
-    // }
-
+    public static Veiculo criarVeiculo() {
+        System.out.println("Placa: ");
+        String placa = scanner.next();
+        System.out.println("Marca: ");
+        String marca = scanner.next();
+        System.out.println("Modelo: ");
+        String modelo = scanner.next();
+        System.out.println("Ano de fabricacao: ");
+        int anoFabricacao = Integer.parseInt(scanner.next());
+        // placa marca modelo anofabricacao
+        Veiculo veiculo = new Veiculo(placa, marca, modelo, anoFabricacao);
+        return veiculo;
+    }
 }
