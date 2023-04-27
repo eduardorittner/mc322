@@ -1,0 +1,74 @@
+import java.util.Scanner;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+
+public class Construtor {
+    private static Scanner scanner = new Scanner(System.in);
+    private static SimpleDateFormat dateScanner = new SimpleDateFormat("dd-MM-yyyy");
+
+    public static ClientePF criarClientePF() {
+        while (true) {
+            try {
+                System.out.println("Criando um novo Cliente PF");
+                System.out.println("Nome: ");
+                String nome = scanner.next();
+                System.out.println("Educação: ");
+                String educacao = scanner.next();
+                System.out.println("Gênero: ");
+                String genero = scanner.next();
+                System.out.println("Classe econômica: ");
+                String classeEconomica = scanner.next();
+                System.out.println("Endereço: ");
+                String endereco = scanner.next();
+                System.out.println("Data da licença (dd-mm-aaaa): ");
+                String rawDataLicenca = scanner.next();
+                Date dataLicenca = dateScanner.parse(rawDataLicenca);
+                System.out.println("Cpf: ");
+                String cpf = scanner.next();
+                System.out.println("Data de nascimento (dd-mm-aaaa): ");
+                String rawDataNascimento = scanner.next();
+                Date dataNascimento = dateScanner.parse(rawDataNascimento);
+                ClientePF cliente = new ClientePF(nome, cpf, dataLicenca, educacao, genero, classeEconomica, endereco,
+                        dataNascimento);
+                return cliente;
+            } catch (java.text.ParseException e) {
+                System.out.println("Data inserida possui formato inválido, tente novamente");
+            } catch (Exception e) {
+                System.out.println("Cpf digitado é invalido, tente novamente.");
+            }
+        }
+    }
+
+    public static ClientePJ criarClientePJ() {
+        while (true) {
+            try {
+                System.out.println("Criando um novo Cliente PJ");
+                System.out.println("Nome: ");
+                String nome = scanner.next();
+                System.out.println("Endereço: ");
+                String endereco = scanner.next();
+                System.out.println("Cnpj: ");
+                String cnpj = scanner.next();
+                System.out.println("Data de fundação (dd-mm-aaaa): ");
+                String rawDataFundacao = scanner.next();
+                Date dataFundacao = dateScanner.parse(rawDataFundacao);
+                ClientePJ cliente = new ClientePJ(nome, endereco, dataFundacao, cnpj);
+                return cliente;
+            } catch (java.text.ParseException e) {
+                System.out.println("Data inserida possui formato inválido, tente novamente");
+            } catch (Exception e) {
+                System.out.println("Cpf digitado é invalido, tente novamente.");
+            }
+        }
+    }
+
+    // public static Seguradora criarSeguradora() {
+    // }
+
+    // public static Sinistro criarSinistro() {
+    // }
+
+    // public static Veiculo criarVeiculo() {
+    // }
+
+}

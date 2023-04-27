@@ -50,6 +50,15 @@ public class Cliente {
         return false;
     }
 
+    public Veiculo encontrarVeiculo(String placa) {
+        for (Veiculo veiculo : veiculos) {
+            if (veiculo.getPlaca().equals(placa)) {
+                return veiculo;
+            }
+        }
+        return null;
+    }
+
     public ArrayList<Veiculo> listarVeiculos() {
         return veiculos;
     }

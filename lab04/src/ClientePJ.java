@@ -19,31 +19,6 @@ public class ClientePJ extends Cliente {
         }
     }
 
-    public static ClientePJ criarCliente() {
-        while (true) {
-            try {
-                Scanner scanner = new Scanner(System.in);
-                System.out.println("Criando um novo Cliente PJ");
-                System.out.println("Nome: ");
-                String nome = scanner.next();
-                System.out.println("Endereço: ");
-                String endereco = scanner.next();
-                System.out.println("Cnpj: ");
-                String cnpj = scanner.next();
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                System.out.println("Data de fundação (dd-mm-aaaa): ");
-                String rawDataFundacao = scanner.next();
-                Date dataFundacao = dateFormat.parse(rawDataFundacao);
-                ClientePJ cliente = new ClientePJ(nome, endereco, dataFundacao, cnpj);
-                return cliente;
-            } catch (java.text.ParseException e) {
-                System.out.println("Data inserida possui formato inválido, tente novamente");
-            } catch (Exception e) {
-                System.out.println("Cpf digitado é invalido, tente novamente.");
-            }
-        }
-    }
-
     private String digitosVerificadoresCNPJ(String cnpj) {
         int total = 0;
         int resto = 0;

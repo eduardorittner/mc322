@@ -4,6 +4,9 @@ import java.text.SimpleDateFormat;
 
 public class AppMain {
         public static void main(String[] args) {
-                System.out.println(Operacao.getEnum(2));
+                Menu menu = new Menu();
+                while (true) {
+                        menu.next();
+                }
         }
 }

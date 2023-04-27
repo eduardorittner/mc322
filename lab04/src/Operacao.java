@@ -1,8 +1,9 @@
 public enum Operacao {
     CADASTRAR(1),
-    CADASTRAR_CLIENTE(11),
-    CADASTRAR_VEICULO(12),
-    CADASTRAR_SEGURADORA(13),
+    CADASTRAR_CLIENTEPF(11),
+    CADASTRAR_CLIENTEPJ(12),
+    CADASTRAR_VEICULO(13),
+    CADASTRAR_SEGURADORA(14),
     EDITAR(2),
     EDITAR_CLIENTE(21),
     EDITAR_VEICULO(22),
@@ -21,8 +22,8 @@ public enum Operacao {
     LISTAR_VEICULO_SEG(45),
     GERAR_SINISTRO(5),
     CALCULAR_RECEITA(6),
-    INICIAL(-1),
-    SAIR(0);
+    INICIAL(0),
+    MUDAR_SEGURADORA(-2);
 
     private final int operacao;
 

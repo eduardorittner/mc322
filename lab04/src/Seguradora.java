@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
+import java.text.SimpleDateFormat;
 
 public class Seguradora {
     private String nome;
@@ -16,6 +18,18 @@ public class Seguradora {
         this.endereco = endereco;
         this.listaSinistros = new ArrayList<Sinistro>();
         this.listaClientes = new ArrayList<Cliente>();
+    }
+
+    public static Seguradora cadastrarSeguradora(Scanner scanner) {
+        System.out.println("Nome: ");
+        String nome = scanner.next();
+        System.out.println("Telefone: ");
+        String telefone = scanner.next();
+        System.out.println("Email: ");
+        String email = scanner.next();
+        System.out.println("Endereco: ");
+        String endereco = scanner.next();
+        return new Seguradora(nome, telefone, email, endereco);
     }
 
     public boolean cadastrarCliente(Cliente cliente) {
@@ -70,12 +84,42 @@ public class Seguradora {
         return true;
     }
 
-    public boolean gerarSinistro(Date data, String endereco, Seguradora seguradora, Veiculo veiculo,
-            Cliente cliente) {
+    private Cliente getCliente(String id) {
+        for (Cliente cliente : listaClientes) {
+            if (cliente.getCadastroPessoal().equals(id)) {
+                return cliente;
+            }
+        }
+        return null;
+    }
+
+    public boolean cadastrarSinistro(Scanner scanner, SimpleDateFormat dateScanner) {
+        System.out.println("Data: ");
+        try {
+            Date data = dateScanner.parse(scanner.next());
+            System.out.println("ID do cliente: ");
+            String id = scanner.next();
+            Cliente cliente = getCliente(id);
+            System.out.println("Placa do veículo: ");
+            String placa = scanner.next();
+            Veiculo veiculo = cliente.encontrarVeiculo(placa);
+            if (!gerarSinistro(data, endereco, veiculo, cliente)) {
+                return false;
+            }
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean gerarSinistro(Date data, String endereco, Veiculo veiculo, Cliente cliente) {
         if (!cliente.listarVeiculos().contains(veiculo)) {
             return false;
         }
-        Sinistro novoSinistro = new Sinistro(data, endereco, seguradora, veiculo, cliente);
+        if (!listaClientes.contains(cliente)) {
+            return false;
+        }
+        Sinistro novoSinistro = new Sinistro(data, endereco, this, veiculo, cliente);
         listaSinistros.add(novoSinistro);
         return true;
     }
