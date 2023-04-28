@@ -1,14 +1,32 @@
-public class Veiculo {
-    String placa;
-    String marca;
-    String modelo;
-    int anoFabricacao;
+import java.util.ArrayList;
 
-    public Veiculo(String placa, String marca, String modelo, int anoFabricacao) {
+public class Veiculo {
+
+    private static ArrayList<String> listaPlacas = new ArrayList<String>();
+    private String placa;
+    private String marca;
+    private String modelo;
+    private int anoFabricacao;
+
+    public Veiculo(String placa, String marca, String modelo, int anoFabricacao) throws Exception {
+        if (!placaValida(placa)) {
+            throw new Exception("Esta placa já está registrada no sistema");
+        }
         this.placa = placa;
         this.marca = marca;
         this.modelo = modelo;
         this.anoFabricacao = anoFabricacao;
+    }
+
+    public static boolean placaValida(String placa) {
+        if (listaPlacas.contains(placa)) {
+            return false;
+        }
+        return true;
+    }
+
+    public static void removePlaca(String placa) {
+        listaPlacas.remove(placa);
     }
 
     public int getAnoFabricacao() {

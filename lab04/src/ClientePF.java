@@ -9,7 +9,6 @@ public class ClientePF extends Cliente {
     private Date dataLicenca;
     private String educacao;
     private Seguradora seguradora;
-    private Veiculo veiculo;
     private String classeEconomica;
     private Date dataNascimento;
 
@@ -67,14 +66,6 @@ public class ClientePF extends Cliente {
 
     public void setSeguradora(Seguradora seguradora) {
         this.seguradora = seguradora;
-    }
-
-    public Veiculo getVeiculo() {
-        return veiculo;
-    }
-
-    public void setVeiculo(Veiculo veiculo) {
-        this.veiculo = veiculo;
     }
 
     public String getClasseEconomica() {
@@ -165,7 +156,7 @@ public class ClientePF extends Cliente {
 
     @Override
     public String getCadastroPessoal() {
-        return cpf;
+        return cpf.replaceAll("[^\\d]", "");
     }
 
     @Override

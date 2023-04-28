@@ -77,15 +77,15 @@ public class Construtor {
 
     public static Sinistro criarSinistro(Seguradora seguradora) {
         try {
-            System.out.println("Data: ");
-            Date data = dateScanner.parse(scanner.next());
+            System.out.println("Data: dd-MM-yyyy");
+            Date data = dateScanner.parse(scanner.nextLine());
             System.out.println("Endereco: ");
-            String endereco = scanner.next();
+            String endereco = scanner.nextLine();
             System.out.println("Id do cliente: ");
-            Cliente cliente = seguradora.getCliente(scanner.next());
+            Cliente cliente = seguradora.getCliente(scanner.nextLine());
             System.out.println("Placa do veiculo: ");
-            Veiculo veiculo = cliente.getVeiculo(scanner.next());
-            if (!cliente.listarVeiculos().contains(veiculo) || !seguradora.getListaClientes().contains(cliente)) {
+            Veiculo veiculo = cliente.getVeiculo(scanner.nextLine());
+            if (!cliente.listarVeiculos().contains(veiculo) || !seguradora.listarClientes().contains(cliente)) {
                 return null;
             }
             Sinistro sinistro = new Sinistro(data, endereco, seguradora, veiculo, cliente);
@@ -96,16 +96,21 @@ public class Construtor {
     }
 
     public static Veiculo criarVeiculo() {
-        System.out.println("Placa: ");
-        String placa = scanner.next();
-        System.out.println("Marca: ");
-        String marca = scanner.next();
-        System.out.println("Modelo: ");
-        String modelo = scanner.next();
-        System.out.println("Ano de fabricacao: ");
-        int anoFabricacao = Integer.parseInt(scanner.next());
-        // placa marca modelo anofabricacao
-        Veiculo veiculo = new Veiculo(placa, marca, modelo, anoFabricacao);
-        return veiculo;
+        try {
+            System.out.println("Placa: ");
+            String placa = scanner.next();
+            System.out.println("Marca: ");
+            String marca = scanner.next();
+            System.out.println("Modelo: ");
+            String modelo = scanner.next();
+            System.out.println("Ano de fabricacao: ");
+            int anoFabricacao = Integer.parseInt(scanner.next());
+            // placa marca modelo anofabricacao
+            Veiculo veiculo = new Veiculo(placa, marca, modelo, anoFabricacao);
+            return veiculo;
+        } catch (Exception e) {
+            System.out.println("Esta placa já está já registrada");
+            return null;
+        }
     }
 }

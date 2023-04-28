@@ -22,8 +22,8 @@ public enum Operacao {
     LISTAR_VEICULO_SEG(45),
     GERAR_SINISTRO(5),
     CALCULAR_RECEITA(6),
-    INICIAL(0),
-    MUDAR_SEGURADORA(-2);
+    SELECIONAR_SEGURADORA(7),
+    INICIAL(0);
 
     private final int operacao;
 

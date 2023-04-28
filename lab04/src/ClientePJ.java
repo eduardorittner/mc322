@@ -79,7 +79,7 @@ public class ClientePJ extends Cliente {
 
     @Override
     public String getCadastroPessoal() {
-        return cnpj;
+        return cnpj.replaceAll("[^\\d]", "");
     }
 
     public Date getDataFundacao() {

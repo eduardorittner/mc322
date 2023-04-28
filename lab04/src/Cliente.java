@@ -44,6 +44,7 @@ public class Cliente {
         for (Veiculo veiculoAtual : veiculos) {
             if (veiculoAtual.getPlaca().equals(placa)) {
                 veiculos.remove(placa);
+                Veiculo.removePlaca(placa);
                 return true;
             }
         }

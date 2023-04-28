@@ -44,8 +44,10 @@ public class Seguradora {
     }
 
     public boolean removerCliente(String cliente) {
+        // TODO testar que a funcao removeSinistrosCliente funciona
         for (Cliente clienteAtual : listaClientes) {
             if (clienteAtual.getNome().equals(cliente)) {
+                removeSinistrosCliente(clienteAtual);
                 listaClientes.remove(clienteAtual);
                 return true;
             }
@@ -53,7 +55,15 @@ public class Seguradora {
         return false;
     }
 
-    public ArrayList<Cliente> getListaClientes() {
+    private void removeSinistrosCliente(Cliente cliente) {
+        for (Sinistro sinistro : listaSinistros) {
+            if (sinistro.getCliente().equals(cliente)) {
+                listaSinistros.remove(sinistro);
+            }
+        }
+    }
+
+    public ArrayList<Cliente> listarClientes() {
         return listaClientes;
     }
 
@@ -115,8 +125,28 @@ public class Seguradora {
         return false;
     }
 
+    public ArrayList<Sinistro> listarSinistrosCliente(Cliente cliente) {
+        ArrayList<Sinistro> sinistrosCliente = new ArrayList<Sinistro>();
+        for (Sinistro sinistro : listaSinistros) {
+            if (sinistro.getCliente().equals(cliente)) {
+                sinistrosCliente.add(sinistro);
+            }
+        }
+        return sinistrosCliente;
+    }
+
     public ArrayList<Sinistro> listarSinistros() {
         return listaSinistros;
+    }
+
+    public boolean removeSinistro(int id) {
+        for (Sinistro sinistro : listaSinistros) {
+            if (sinistro.getId() == (id)) {
+                listaSinistros.remove(sinistro);
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean limparSinistros() {
