@@ -2,7 +2,7 @@ import java.util.Date;
 
 public class Validacao {
 
-    private String digitosVerificadoresCNPJ(String cnpj) {
+    private static String digitosVerificadoresCNPJ(String cnpj) {
         int total = 0;
         int resto = 0;
         int atual;
@@ -43,7 +43,7 @@ public class Validacao {
         return resultado;
     }
 
-    public boolean validarCNPJ(String cnpj) {
+    public static boolean validarCNPJ(String cnpj) {
         String aux_cnpj = cnpj.replaceAll("[^\\d]", "");
 
         if (aux_cnpj.length() != 14) {
@@ -60,7 +60,7 @@ public class Validacao {
         return true;
     }
 
-    private boolean cpfDigitosIguais(String cpf) {
+    private static boolean cpfDigitosIguais(String cpf) {
         // Retorna true se o cpf for composto de somente um dígito repetido 11 vezes
 
         for (int i = 1; i < 11; i++) {
@@ -71,7 +71,7 @@ public class Validacao {
         return true;
     }
 
-    private String digitosVerificadoresCPF(String cpf) {
+    private static String digitosVerificadoresCPF(String cpf) {
         // Calcula os digitos verificadores do cpf com base nos 9 primeiros números
 
         int total = 0;
@@ -110,7 +110,7 @@ public class Validacao {
         return resultado;
     }
 
-    public boolean validarCPF(String cpf) {
+    public static boolean validarCPF(String cpf) {
         String aux_cpf = cpf.replaceAll("[^\\d]", "");
 
         if (aux_cpf.length() != 11) {

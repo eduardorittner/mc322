@@ -32,7 +32,7 @@ public class Menu {
             Date data = new Date();
             ClientePF clientePF = new ClientePF("nome", "458.789.318-85", data, "educacao", "genero",
                     "classeEconomica", "endereco", data);
-            ClientePJ clientePJ = new ClientePJ("outro nome", "endereco", data, "11.444.777/0001-61");
+            ClientePJ clientePJ = new ClientePJ("outro nome", "endereco", data, "11.444.777/0001-61", 7);
             Veiculo veiculo1 = new Veiculo("placa", "marca", "modelo", 2000);
             Veiculo veiculo2 = new Veiculo("PLACA", "marca", "modelo", 2001);
             clientePF.cadastrarVeiculo(veiculo1);
@@ -150,12 +150,20 @@ public class Menu {
             case EDITAR_CLIENTE:
                 System.out.println("Id do cliente: ");
                 cliente = seguradoraAtual.getCliente(scanner.next());
+                editor.editarCliente(cliente);
+                break;
 
             case EDITAR_VEICULO:
+                System.out.println("Id do cliente dono do veículo: ");
+                cliente = seguradoraAtual.getCliente(scanner.next());
+                System.out.println("Placa do veículo: ");
+                Veiculo veiculo = cliente.getVeiculo(scanner.next());
+                editor.editarVeiculo(veiculo);
+                break;
 
             case EDITAR_SEGURADORA:
-
-            case EDITAR_SINISTRO:
+                editor.editarSeguradora(seguradoraAtual);
+                break;
 
             case EXCLUIR_CLIENTE:
                 System.out.println("Id do cliente: ");
@@ -172,6 +180,7 @@ public class Menu {
                         }
                     }
                 }
+                break;
 
             case EXCLUIR_SEGURADORA:
                 System.out.println("Nome da seguradora: ");

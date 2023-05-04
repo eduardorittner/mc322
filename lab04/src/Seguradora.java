@@ -32,6 +32,28 @@ public class Seguradora {
         return new Seguradora(nome, telefone, email, endereco);
     }
 
+    public double calculaReceita() {
+        int receita = 0;
+        for (Cliente cliente : listaClientes) {
+            receita += calculaPrecoSeguroCliente(cliente);
+        }
+        return receita;
+    }
+
+    public double calculaPrecoSeguroCliente(Cliente cliente) {
+        return cliente.calculaScore() * (1 + qtdeSinistros(cliente));
+    }
+
+    private int qtdeSinistros(Cliente cliente) {
+        int qtd = 0;
+        for (Sinistro sinistro : listaSinistros) {
+            if (sinistro.getCliente().equals(cliente)) {
+                qtd++;
+            }
+        }
+        return qtd;
+    }
+
     public boolean cadastrarCliente(Cliente cliente) {
         // Confirma se não existe nenhum cliente com o mesmo cpf ou cnpj já cadastrado
         for (Cliente clienteAtual : listaClientes) {
@@ -113,6 +135,20 @@ public class Seguradora {
         }
         listaSinistros.add(sinistro);
         return false;
+    }
+
+    public Sinistro getSinistro(String in) {
+        try {
+            int id = Integer.parseInt(in);
+            for (Sinistro sinistro : listaSinistros) {
+                if (sinistro.getId() == id) {
+                    return sinistro;
+                }
+            }
+            return null;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public boolean visualizarSinistro(String cliente) {

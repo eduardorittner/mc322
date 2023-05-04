@@ -75,6 +75,14 @@ public class Editor {
         }
     }
 
+    public void editarCliente(Cliente cliente) {
+        if (cliente instanceof ClientePJ) {
+            editarCliente((ClientePJ) cliente);
+        } else {
+            editarCliente((ClientePF) cliente);
+        }
+    }
+
     public void editarCliente(ClientePJ cliente) {
         System.out.println(menuClientePJ);
         try {

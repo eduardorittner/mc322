@@ -6,75 +6,25 @@ public class ClientePJ extends Cliente {
 
     private final String cnpj;
     private Date dataFundacao;
+    private int qtdeFuncionarios;
 
-    public ClientePJ(String nome, String endereco, Date dataFundacao, String cnpj) throws Exception {
+    public ClientePJ(String nome, String endereco, Date dataFundacao, String cnpj, int qtdeFuncionarios)
+            throws Exception {
 
         super(nome, endereco);
         this.dataFundacao = dataFundacao;
+        this.qtdeFuncionarios = qtdeFuncionarios;
 
-        if (validarCNPJ(cnpj)) {
+        if (Validacao.validarCNPJ(cnpj)) {
             this.cnpj = cnpj;
         } else {
             throw new Exception("O cnpj inserido não é válido.");
         }
     }
 
-    private String digitosVerificadoresCNPJ(String cnpj) {
-        int total = 0;
-        int resto = 0;
-        int atual;
-        int primeiro_digito_verificador;
-        int segundo_digito_verificador;
-        int[] multiplicadores = { 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
-
-        for (int i = 0; i < 12; i++) {
-            atual = Character.getNumericValue(cnpj.charAt(i));
-            total += atual * multiplicadores[i + 1];
-        }
-
-        resto = total % 11;
-        if (resto < 2) {
-            primeiro_digito_verificador = 0;
-        } else {
-            primeiro_digito_verificador = 11 - resto;
-        }
-
-        total = 0;
-
-        for (int i = 0; i < 13; i++) {
-            atual = Character.getNumericValue(cnpj.charAt(i));
-            total += atual * multiplicadores[i];
-        }
-
-        resto = total % 11;
-
-        if (resto < 2) {
-            segundo_digito_verificador = 0;
-        } else {
-            segundo_digito_verificador = 11 - resto;
-        }
-
-        String resultado = Integer.toString(primeiro_digito_verificador)
-                + (Integer.toString(segundo_digito_verificador));
-
-        return resultado;
-    }
-
-    public boolean validarCNPJ(String cnpj) {
-        String aux_cnpj = cnpj.replaceAll("[^\\d]", "");
-
-        if (aux_cnpj.length() != 14) {
-            return false;
-        }
-
-        String digitosVerificadoresOriginais = aux_cnpj.substring(12);
-        String digitosVerificadoresCorretos = digitosVerificadoresCNPJ(aux_cnpj);
-        boolean digitosVerificadoresDiferentes = !(digitosVerificadoresOriginais.equals(digitosVerificadoresCorretos));
-        if (digitosVerificadoresDiferentes) {
-            return false;
-        }
-
-        return true;
+    @Override
+    public double calculaScore() {
+        return CalculoSeguro.VALOR_BASE.getFator() * (1 + (qtdeFuncionarios) / 100) * listarVeiculos().size();
     }
 
     @Override

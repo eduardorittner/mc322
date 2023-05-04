@@ -5,14 +5,26 @@ import java.util.ArrayList;
 
 public class Cliente {
 
-    String nome;
-    String endereco;
-    ArrayList<Veiculo> veiculos;
+    private String nome;
+    private String endereco;
+    private ArrayList<Veiculo> veiculos;
+    private double valorSeguro;
 
     public Cliente(String nome, String endereco) {
         this.nome = nome;
         this.endereco = endereco;
         this.veiculos = new ArrayList<Veiculo>();
+        this.valorSeguro = 0;
+    }
+
+    public void transferirSeguro(Cliente clienteDestino) {
+        clienteDestino.setListaVeiculo(this.veiculos);
+        clienteDestino.calculaScore();
+        calculaScore();
+    }
+
+    public double getValorSeguro() {
+        return valorSeguro;
     }
 
     public String getNome() {
@@ -34,6 +46,7 @@ public class Cliente {
     public boolean cadastrarVeiculo(Veiculo veiculo) {
         try {
             veiculos.add(veiculo);
+            calculaScore();
             return true;
         } catch (Exception e) {
             return false;
@@ -45,6 +58,7 @@ public class Cliente {
             if (veiculoAtual.getPlaca().equals(placa)) {
                 veiculos.remove(placa);
                 Veiculo.removePlaca(placa);
+                calculaScore();
                 return true;
             }
         }
@@ -60,8 +74,17 @@ public class Cliente {
         return null;
     }
 
+    public void setListaVeiculo(ArrayList<Veiculo> listaVeiculos) {
+        veiculos = listaVeiculos;
+    }
+
     public ArrayList<Veiculo> listarVeiculos() {
         return veiculos;
+    }
+
+    public double calculaScore() {
+        // Método genérico para ser sobreescrito pelas classes herdeiras
+        return 0;
     }
 
     public String getCadastroPessoal() {

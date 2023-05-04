@@ -52,7 +52,9 @@ public class Construtor {
                 System.out.println("Data de fundação (dd-mm-aaaa): ");
                 String rawDataFundacao = scanner.next();
                 Date dataFundacao = dateScanner.parse(rawDataFundacao);
-                ClientePJ cliente = new ClientePJ(nome, endereco, dataFundacao, cnpj);
+                System.out.println("Quantidade de funcionários: ");
+                int qtdeFuncionarios = Integer.parseInt(scanner.next());
+                ClientePJ cliente = new ClientePJ(nome, endereco, dataFundacao, cnpj, qtdeFuncionarios);
                 return cliente;
             } catch (java.text.ParseException e) {
                 System.out.println("Data inserida possui formato inválido, tente novamente");
