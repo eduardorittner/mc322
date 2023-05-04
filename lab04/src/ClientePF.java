@@ -1,6 +1,7 @@
 import java.util.Date;
 import java.util.Scanner;
 import java.text.SimpleDateFormat;
+import java.util.concurrent.TimeUnit;
 
 public class ClientePF extends Cliente {
 
@@ -103,8 +104,11 @@ public class ClientePF extends Cliente {
     }
 
     public int getIdade() {
-        Date data = new Date();
-        return data.getYear() - dataNascimento.getYear();
+        Date dataAtual = new Date();
+
+        long diferencaEmMiliS = dataAtual.getTime() - dataNascimento.getTime();
+        long diferenca = TimeUnit.DAYS.convert(diferencaEmMiliS, TimeUnit.MILLISECONDS);
+        return (int) diferenca / 365;
     }
 
     @Override
@@ -114,7 +118,8 @@ public class ClientePF extends Cliente {
 
     @Override
     public String toString() {
-        return super.toString() + "\ncpf: " + cpf + "\ndataNascimento: " + dataNascimento;
+        return "Nome: " + getNome() + "\nCPF: " + cpf + "\nValor do seguro: " + getValorSeguro() + "\nGênero: " + genero
+                + "\nData de nascimento: " + dataNascimento;
     }
 
 }

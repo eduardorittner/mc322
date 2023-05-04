@@ -1,7 +1,7 @@
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
-import java.text.SimpleDateFormat;
 
 public class Seguradora {
     private String nome;
@@ -11,7 +11,8 @@ public class Seguradora {
     private ArrayList<Sinistro> listaSinistros;
     private ArrayList<Cliente> listaClientes;
 
-    public Seguradora(String nome, String telefone, String email, String endereco) {
+    public Seguradora(String nome, String telefone, String email,
+            String endereco) {
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;
@@ -32,6 +33,13 @@ public class Seguradora {
         return new Seguradora(nome, telefone, email, endereco);
     }
 
+    public void transferirSeguro(Cliente clienteOrigem, Cliente clienteDestino) {
+        clienteDestino.concatenaListaVeiculos(clienteOrigem.listarVeiculos());
+        clienteOrigem.limparVeiculos();
+        clienteDestino.calculaScore();
+        clienteOrigem.calculaScore();
+    }
+
     public double calculaReceita() {
         int receita = 0;
         for (Cliente cliente : listaClientes) {
@@ -41,7 +49,9 @@ public class Seguradora {
     }
 
     public double calculaPrecoSeguroCliente(Cliente cliente) {
-        return cliente.calculaScore() * (1 + qtdeSinistros(cliente));
+        double resultado = cliente.calculaScore() * (1 + qtdeSinistros(cliente));
+        cliente.setValorSeguro(resultado);
+        return resultado;
     }
 
     private int qtdeSinistros(Cliente cliente) {
@@ -55,9 +65,11 @@ public class Seguradora {
     }
 
     public boolean cadastrarCliente(Cliente cliente) {
-        // Confirma se não existe nenhum cliente com o mesmo cpf ou cnpj já cadastrado
+        // Confirma se não existe nenhum cliente com o mesmo cpf ou cnpj já
+        // cadastrado
         for (Cliente clienteAtual : listaClientes) {
-            if (cliente.getCadastroPessoal().equals(clienteAtual.getCadastroPessoal())) {
+            if (cliente.getCadastroPessoal().equals(
+                    clienteAtual.getCadastroPessoal())) {
                 return false;
             }
         }
@@ -121,6 +133,7 @@ public class Seguradora {
     }
 
     public Cliente getCliente(String id) {
+        id = id.replaceAll("[^\\d]", "");
         for (Cliente cliente : listaClientes) {
             if (cliente.getCadastroPessoal().equals(id)) {
                 return cliente;
@@ -227,8 +240,9 @@ public class Seguradora {
 
     @Override
     public String toString() {
-        return "Seguradora\nNome: " + nome + "\nTelefone: " + telefone + "\nEndereco: " + endereco + "\nEmail: "
-                + email + "\nQuantidade de Clientes: " + listaClientes.size() + "\nQuantidade de Sinistros: "
-                + listaSinistros.size();
+        return "Seguradora\nNome: " + nome + "\nTelefone: " + telefone +
+                "\nEndereço: " + endereco + "\nEmail: " + email +
+                "\nQuantidade de Clientes: " + listaClientes.size() +
+                "\nQuantidade de Sinistros: " + listaSinistros.size();
     }
 }

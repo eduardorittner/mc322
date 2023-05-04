@@ -42,7 +42,8 @@ public class ClientePJ extends Cliente {
 
     @Override
     public String toString() {
-        return super.toString() + "\ncnpj: " + cnpj + "\ndataFundacao: " + dataFundacao;
+        return "Nome: " + getNome() + "\nCNPJ: " + cnpj + "\nValor do seguro: " + getValorSeguro()
+                + "\nQuantidade de funcionários: " + qtdeFuncionarios;
     }
 
 }

@@ -87,8 +87,8 @@ public class Sinistro {
 
     @Override
     public String toString() {
-        return "Sinistro " + id + " [cliente: " + cliente.getCadastroPessoal() + ", data: " + data + ", endereco: "
-                + endereco + ", seguradora: " + seguradora.getNome() + ", veiculo: " + veiculo.getPlaca() + "]";
+        return "Sinistro " + id + "\nSeguradora: " + seguradora.getNome() + "\nCliente: " + cliente.getCadastroPessoal()
+                + "\nVeículo: " + veiculo.getPlaca() + "\nData: " + data + "\nEndereço: " + endereco;
     }
 
 }

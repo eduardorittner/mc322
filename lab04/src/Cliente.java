@@ -17,12 +17,6 @@ public class Cliente {
         this.valorSeguro = 0;
     }
 
-    public void transferirSeguro(Cliente clienteDestino) {
-        clienteDestino.setListaVeiculo(this.veiculos);
-        clienteDestino.calculaScore();
-        calculaScore();
-    }
-
     public double getValorSeguro() {
         return valorSeguro;
     }
@@ -74,12 +68,20 @@ public class Cliente {
         return null;
     }
 
-    public void setListaVeiculo(ArrayList<Veiculo> listaVeiculos) {
-        veiculos = listaVeiculos;
+    public void concatenaListaVeiculos(ArrayList<Veiculo> listaVeiculos) {
+        veiculos.addAll(listaVeiculos);
     }
 
     public ArrayList<Veiculo> listarVeiculos() {
         return veiculos;
+    }
+
+    public void limparVeiculos() {
+        veiculos.clear();
+    }
+
+    public void setValorSeguro(double valorSeguro) {
+        this.valorSeguro = valorSeguro;
     }
 
     public double calculaScore() {
@@ -91,11 +93,5 @@ public class Cliente {
         // Método genérico para ser sobreescrito pelas classes herdeiras, equivale a
         // pedir o CPF ou CNPJ, dependendo do tipo de cliente
         return "";
-    }
-
-    @Override
-    public String toString() {
-        return "Cliente\nendereco: " + endereco
-                + "\nnome: " + nome + "\nnumero de veiculos: " + veiculos.size();
     }
 }
