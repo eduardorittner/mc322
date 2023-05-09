@@ -23,7 +23,11 @@ public class ClientePF extends Cliente {
         this.educacao = educacao;
         this.genero = genero;
         this.classeEconomica = classeEconomica;
-        this.dataNascimento = dataNascimento;
+        if (Validacao.validarData(dataNascimento)) {
+            this.dataNascimento = dataNascimento;
+        } else {
+            throw new Exception("Data inserida é inválida");
+        }
 
         if (Validacao.validarCPF(cpf)) {
             this.cpf = cpf;

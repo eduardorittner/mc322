@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Sinistro {
-    final int id;
-    Date data;
-    String endereco;
-    Seguradora seguradora;
-    Veiculo veiculo;
-    Cliente cliente;
-    static ArrayList<Integer> listaIds = new ArrayList<Integer>();
+    private final int id;
+    private Date data;
+    private String endereco;
+    private Seguradora seguradora;
+    private Veiculo veiculo;
+    private Cliente cliente;
+    private static ArrayList<Integer> listaIds = new ArrayList<Integer>();
     // As operações mais realizadas na listaIds são de adição no fim do vetor e
     // iteração sobre o mesmo, sendo assim, um array é mais eficiente
 

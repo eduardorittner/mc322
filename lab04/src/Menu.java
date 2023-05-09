@@ -23,11 +23,16 @@ public class Menu {
     private SimpleDateFormat dateScanner;
     private Editor editor;
 
-    Menu() {
+    Menu(ArrayList<Seguradora> listaSeguradoras) {
         this.scanner = new Scanner(System.in);
         this.dateScanner = new SimpleDateFormat("dd-MM-yyyy");
         this.editor = new Editor(scanner, dateScanner);
-        // this.listaSeguradoras = inicializar();
+        // if (listaSeguradoras.equals(null)) {
+        // // this.listaSeguradoras = inicializar();
+
+        // } else {
+        // this.listaSeguradoras = listaSeguradoras;
+        // }
         // ===================================================
         // FIXME
         try {
@@ -44,11 +49,12 @@ public class Menu {
             temp.cadastrarCliente(clientePJ);
             this.listaSeguradoras = new ArrayList<Seguradora>();
             listaSeguradoras.add(temp);
+            this.seguradoraAtual = temp;
         } catch (Exception e) {
             System.out.println(e);
         }
         // ===================================================
-        this.seguradoraAtual = listaSeguradoras.get(0);
+        // this.seguradoraAtual = listaSeguradoras.get(0);
         this.menuAtual = Operacao.INICIAL;
     }
 
