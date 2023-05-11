@@ -31,30 +31,8 @@ public class Menu {
         // // this.listaSeguradoras = inicializar();
 
         // } else {
-        // this.listaSeguradoras = listaSeguradoras;
-        // }
-        // ===================================================
-        // FIXME
-        try {
-            Seguradora temp = new Seguradora("Petrobras", "19-984265556", "email@gmail.com.br", "Rua abacate 123");
-            Date data = new Date();
-            ClientePF clientePF = new ClientePF("nome", "458.789.318-85", data, "educacao", "genero",
-                    "classeEconomica", "endereco", data);
-            ClientePJ clientePJ = new ClientePJ("outro nome", "endereco", data, "11.444.777/0001-61", 7);
-            Veiculo veiculo1 = new Veiculo("placa", "marca", "modelo", 2000);
-            Veiculo veiculo2 = new Veiculo("PLACA", "marca", "modelo", 2001);
-            clientePF.cadastrarVeiculo(veiculo1);
-            clientePJ.cadastrarVeiculo(veiculo2);
-            temp.cadastrarCliente(clientePF);
-            temp.cadastrarCliente(clientePJ);
-            this.listaSeguradoras = new ArrayList<Seguradora>();
-            listaSeguradoras.add(temp);
-            this.seguradoraAtual = temp;
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        // ===================================================
-        // this.seguradoraAtual = listaSeguradoras.get(0);
+        this.listaSeguradoras = listaSeguradoras;
+        this.seguradoraAtual = listaSeguradoras.get(0);
         this.menuAtual = Operacao.INICIAL;
     }
 

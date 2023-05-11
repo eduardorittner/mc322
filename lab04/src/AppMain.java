@@ -7,34 +7,79 @@ public class AppMain {
         public static void main(String[] args) {
                 try {
                         ArrayList<Seguradora> listaSeguradoras = new ArrayList<Seguradora>();
-                        listaSeguradoras.add(new Seguradora("Petrobras", "(19) 99999-9999",
-                                        "Petrobras@gmail.com",
-                                        "Rua da Petrobras, 000"));
+                        Seguradora seguradora = new Seguradora("Petrobras", "(19) 99999-9999", "Petrobras@gmail.com",
+                                        "Rua da Petrobras, 000");
+                        System.out.println("==== Nova seguradora criada ====");
+                        listaSeguradoras.add(seguradora);
+                        System.out.println(seguradora);
+                        System.out.println("===============================");
 
-                        ClientePF clientePF = new ClientePF("Juvenaldo", "458.789.318-85", new Date(), "Yale",
-                                        "Homem", "A", "Rua do Juvenaldo, 10", new Date());
+                        ClientePF clientePF = new ClientePF("Juvenaldo", "458.789.318-85", new Date(10), "Yale",
+                                        "Homem", "A", "Rua do Juvenaldo, 10", new Date(10));
+                        seguradora.cadastrarCliente(clientePF);
+                        System.out.println("==== Novo ClientePF criado ====");
+                        System.out.println(clientePF);
+                        System.out.println("===============================");
 
-                        ClientePJ clientePJ = new ClientePJ("Milton LTDA", "Rua do Milton LTDA", new Date(),
-                                        "12.345.678/0001-00", 10);
+                        ClientePJ clientePJ = new ClientePJ("Milton LTDA", "Rua do Milton LTDA", new Date(10),
+                                        "26.774.450/0001-25", 10);
+                        seguradora.cadastrarCliente(clientePJ);
+                        System.out.println("==== Novo ClientePJ criado ====");
+                        System.out.println(clientePJ);
+                        System.out.println("===============================");
 
                         clientePF.cadastrarVeiculo(new Veiculo("GUD4142", "Toyota", "Sedan", 2020));
+                        System.out.println("==== Veículo cadastrado no ClientePF ====");
+                        System.out.println(clientePF.getVeiculo("GUD4142"));
+                        System.out.println("===============================");
+
                         clientePJ.cadastrarVeiculo(new Veiculo("DIK1234", "Honda", "Civic", 2020));
+                        System.out.println("==== Veículo cadastrado no ClientePJ ====");
+                        System.out.println(clientePJ.getVeiculo("DIK1234"));
+                        System.out.println("===============================");
 
-                        listaSeguradoras.get(0).cadastrarSinistro(
-                                        new Sinistro(new Date(), "Rua do sinistro", listaSeguradoras.get(0),
-                                                        clientePF.getVeiculo("GUD4142"), clientePF));
+                        seguradora.cadastrarSinistro(new Sinistro(new Date(), "Rua do sinistro", seguradora,
+                                        clientePF.getVeiculo("GUD4142"), clientePF));
+                        System.out.println("==== Novo sinistro gerado no ClientePF ====");
+                        System.out.println(seguradora.visualizarSinistro("45878931885"));
+                        System.out.println("===============================");
 
-                        listaSeguradoras.get(0).cadastrarSinistro(
-                                        new Sinistro(new Date(), "Rua do sinistro", listaSeguradoras.get(0),
-                                                        clientePF.getVeiculo("DIK1234"), clientePJ));
+                        seguradora.cadastrarSinistro(new Sinistro(new Date(), "Rua do sinistro", seguradora,
+                                        clientePJ.getVeiculo("DIK1234"), clientePJ));
+                        System.out.println("==== Novo sinistro gerado no ClientePJ ====");
+                        System.out.println(seguradora.visualizarSinistro("26.774.450/0001-25"));
+
+                        System.out.println("==== Listar Clientes ====");
+                        System.out.println(seguradora.listarClientes());
+                        System.out.println("===============================");
+
+                        System.out.println("==== Visualizar sinistro ====");
+                        System.out.println(seguradora.visualizarSinistro("Juvenaldo"));
+                        System.out.println("===============================");
+
+                        System.out.println("==== Listar Sinistros ====");
+                        System.out.println(seguradora.listarSinistros());
+                        System.out.println("===============================");
+
+                        System.out.println("==== Calcula Preço Seguro (Juvenaldo) ====");
+                        System.out.println(seguradora.calculaPrecoSeguroCliente(clientePF));
+                        System.out.println("===============================");
+
+                        System.out.println("==== Calcula Preço Seguro (Milton LTDA) ====");
+                        System.out.println(seguradora.calculaPrecoSeguroCliente(clientePJ));
+                        System.out.println("===============================");
+
+                        System.out.println("==== Calcula receita ====");
+                        System.out.println(seguradora.calculaReceita());
+                        System.out.println("===============================");
+
+                        Menu menu = new Menu(listaSeguradoras);
+                        while (true) {
+                                menu.next();
+                        }
 
                 } catch (Exception e) {
                         System.out.println(e);
-                }
-
-                Menu menu = new Menu(new ArrayList<Seguradora>());
-                while (true) {
-                        menu.next();
                 }
         }
 }

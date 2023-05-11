@@ -164,9 +164,10 @@ public class Seguradora {
         }
     }
 
-    public boolean visualizarSinistro(String cliente) {
+    public boolean visualizarSinistro(String idCliente) {
+        String idNormalizado = idCliente.replaceAll("[^\\d]", "");
         for (Sinistro sinistroAtual : listaSinistros) {
-            if (sinistroAtual.getCliente().getNome().equals(cliente)) {
+            if (sinistroAtual.getCliente().getCadastroPessoal().equals(idNormalizado)) {
                 System.out.println(sinistroAtual);
                 return true;
             }
