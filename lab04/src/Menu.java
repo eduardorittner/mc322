@@ -7,11 +7,9 @@ import java.util.Date;
 public class Menu {
 
     private String divisor = "=====================================";
-    private String menuInicial = "1 - Cadastrar\n2 - Editar\n3 - Excluir\n4 - Visualizar\n5 - Gerar Sinistro\n6 - Calcular receita\n7 - Calcular seguro\n8 - Transferir seguro\n9 - Selecionar seguradora\n0 - Sair";
+    private String menuInicial = "1 - Cadastrar\n2 - Excluir\n3 - Visualizar\n4 - Gerar Sinistro\n5 - Calcular receita\n6 - Calcular seguro\n7 - Transferir seguro\n8 - Selecionar seguradora\n0 - Sair";
     private String menuCadastrar = "======= MENU CADASTRAR =======\n" + divisor
             + "\n1 - Cadastrar cliente PF\n2 - Cadastrar cliente PJ\n3 - Cadastrar veículo\n4 - Cadastrar seguradora\n0 - Voltar";
-    private String menuEditar = "======= MENU EDITAR =======\n" + divisor
-            + "\n1 - Editar cliente\n2 - Editar veículo\n3 - Editar sinistro\n4 - Editar seguradora\n0 - Voltar";
     private String menuExcluir = "======= MENU EXCLUIR =======\n" + divisor
             + "\n1 - Excluir cliente\n2 - Excluir veículo\n3 - Excluir seguradora\n4 - Excluir sinistro\n0 - Voltar";
     private String menuVisualizar = "======= MENU VISUALIZAR =======\n" + divisor
@@ -21,19 +19,17 @@ public class Menu {
     private Seguradora seguradoraAtual;
     private Scanner scanner;
     private SimpleDateFormat dateScanner;
-    private Editor editor;
 
     Menu(ArrayList<Seguradora> listaSeguradoras) {
         this.scanner = new Scanner(System.in);
         this.dateScanner = new SimpleDateFormat("dd-MM-yyyy");
-        this.editor = new Editor(scanner, dateScanner);
-        // if (listaSeguradoras.equals(null)) {
-        // // this.listaSeguradoras = inicializar();
-
-        // } else {
-        this.listaSeguradoras = listaSeguradoras;
-        this.seguradoraAtual = listaSeguradoras.get(0);
-        this.menuAtual = MenuOperacoes.INICIAL;
+        if (listaSeguradoras.equals(null)) {
+            this.listaSeguradoras = inicializar();
+        } else {
+            this.listaSeguradoras = listaSeguradoras;
+            this.seguradoraAtual = listaSeguradoras.get(0);
+            this.menuAtual = MenuOperacoes.INICIAL;
+        }
     }
 
     private ArrayList<Seguradora> inicializar() {
@@ -72,8 +68,6 @@ public class Menu {
             System.out.println(menuInicial);
         } else if (menuAtual == MenuOperacoes.CADASTRAR) {
             System.out.println(menuCadastrar);
-        } else if (menuAtual == MenuOperacoes.EDITAR) {
-            System.out.println(menuEditar);
         } else if (menuAtual == MenuOperacoes.EXCLUIR) {
             System.out.println(menuExcluir);
         } else if (menuAtual == MenuOperacoes.VISUALIZAR) {
@@ -91,7 +85,6 @@ public class Menu {
                 setMenuAtual(operacao);
                 break;
             case CADASTRAR:
-            case EDITAR:
             case EXCLUIR:
             case VISUALIZAR:
                 // Nesse caso, a unica operação realizada é a mudança do menu atual
@@ -167,30 +160,6 @@ public class Menu {
                 System.out.println("======= Cadastrando seguradora =======");
                 seguradoraAtual = Construtor.criarSeguradora();
                 listaSeguradoras.add(seguradoraAtual);
-                System.out.println(divisor);
-                break;
-
-            case EDITAR_CLIENTE:
-                System.out.println("======= Editando cliente =======");
-                System.out.println("Id do cliente: ");
-                cliente = seguradoraAtual.getCliente(scanner.next());
-                editor.editarCliente(cliente);
-                System.out.println(divisor);
-                break;
-
-            case EDITAR_VEICULO:
-                System.out.println("======= Editando veículo =======");
-                System.out.println("Id do cliente dono do veículo: ");
-                cliente = seguradoraAtual.getCliente(scanner.next());
-                System.out.println("Placa do veículo: ");
-                Veiculo veiculo = cliente.getVeiculo(scanner.next());
-                editor.editarVeiculo(veiculo);
-                System.out.println(divisor);
-                break;
-
-            case EDITAR_SEGURADORA:
-                System.out.println("======= Editando seguradora =======");
-                editor.editarSeguradora(seguradoraAtual);
                 System.out.println(divisor);
                 break;
 
