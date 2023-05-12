@@ -48,13 +48,12 @@ public class Cliente {
     }
 
     public boolean removerVeiculo(String placa) {
-        for (Veiculo veiculoAtual : veiculos) {
-            if (veiculoAtual.getPlaca().equals(placa)) {
-                veiculos.remove(placa);
-                Veiculo.removePlaca(placa);
-                calculaScore();
-                return true;
-            }
+        Veiculo veiculo = getVeiculo(placa);
+        if (veiculo != null) {
+            veiculos.remove(placa);
+            Veiculo.removePlaca(placa);
+            calculaScore();
+            return true;
         }
         return false;
     }
@@ -94,4 +93,5 @@ public class Cliente {
         // pedir o CPF ou CNPJ, dependendo do tipo de cliente
         return "";
     }
+
 }

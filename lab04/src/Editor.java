@@ -21,6 +21,7 @@ public class Editor {
     }
 
     public void editarSeguradora(Seguradora seguradora) {
+        System.out.println("======= Editando " + seguradora.getNome() + " =======");
         System.out.println(menuSeguradora);
         try {
             int comando = this.next();
@@ -48,6 +49,7 @@ public class Editor {
     }
 
     public void editarVeiculo(Veiculo veiculo) {
+        System.out.println("======= Editando " + veiculo.getPlaca() + " =======");
         System.out.println(menuVeiculo);
         try {
             int comando = this.next();
@@ -84,6 +86,7 @@ public class Editor {
     }
 
     public void editarCliente(ClientePJ cliente) {
+        System.out.println("======= Editando " + cliente.getNome() + " =======");
         System.out.println(menuClientePJ);
         try {
             int comando = this.next();
@@ -110,6 +113,7 @@ public class Editor {
     }
 
     public void editarCliente(ClientePF cliente) {
+        System.out.println("======= Editando " + cliente.getNome() + " =======");
         System.out.println(menuClientePF);
         try {
             int comando = this.next();

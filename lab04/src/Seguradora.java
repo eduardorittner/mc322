@@ -64,27 +64,21 @@ public class Seguradora {
         return qtd;
     }
 
-    public boolean cadastrarCliente(Cliente cliente) {
+    public void cadastrarCliente(Cliente cliente) throws Exception {
         // Confirma se não existe nenhum cliente com o mesmo cpf ou cnpj já
         // cadastrado
-        for (Cliente clienteAtual : listaClientes) {
-            if (cliente.getCadastroPessoal().equals(
-                    clienteAtual.getCadastroPessoal())) {
-                return false;
-            }
+        if (listaClientes.contains(cliente)) {
+            throw new Exception("Já existe um cliente com o mesmo ID cadastrado");
         }
         listaClientes.add(cliente);
-        return true;
     }
 
-    public boolean removerCliente(String cliente) {
-        // TODO testar que a funcao removeSinistrosCliente funciona
-        for (Cliente clienteAtual : listaClientes) {
-            if (clienteAtual.getNome().equals(cliente)) {
-                removeSinistrosCliente(clienteAtual);
-                listaClientes.remove(clienteAtual);
-                return true;
-            }
+    public boolean removerCliente(String idCliente) {
+        Cliente cliente = getCliente(idCliente);
+        if (cliente != null) {
+            removeSinistrosCliente(cliente);
+            listaClientes.remove(cliente);
+            return true;
         }
         return false;
     }
@@ -113,13 +107,13 @@ public class Seguradora {
         return clientes;
     }
 
-    public boolean visualizarCliente(String cliente) {
-        for (Cliente clienteAtual : listaClientes) {
-            if (clienteAtual.getNome().equals(cliente)) {
-                System.out.println(clienteAtual);
-                return true;
-            }
+    public boolean visualizarCliente(String idCliente) {
+        Cliente cliente = getCliente(idCliente);
+        if (cliente != null) {
+            System.out.println(cliente);
+            return true;
         }
+        System.out.println("O id não foi encontrado");
         return false;
     }
 

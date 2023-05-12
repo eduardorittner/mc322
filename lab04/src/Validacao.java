@@ -1,4 +1,5 @@
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class Validacao {
 
@@ -137,5 +138,13 @@ public class Validacao {
     public static boolean validarData(Date data) {
         Date dataAtual = new Date();
         return dataAtual.after(data);
+    }
+
+    public static boolean validarIdade(Date data) {
+        Date dataAtual = new Date();
+
+        long diferencaEmMiliS = dataAtual.getTime() - data.getTime();
+        long idade = TimeUnit.DAYS.convert(diferencaEmMiliS, TimeUnit.MILLISECONDS) / 365;
+        return idade > 18;
     }
 }

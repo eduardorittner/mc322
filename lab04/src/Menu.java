@@ -16,7 +16,7 @@ public class Menu {
             + "\n1 - Excluir cliente\n2 - Excluir veículo\n3 - Excluir seguradora\n4 - Excluir sinistro\n0 - Voltar";
     private String menuVisualizar = "======= MENU VISUALIZAR =======\n" + divisor
             + " \n1 - Listar clientes por seguradora\n2 - Listar sinistro por seguradora\n3 - Listar sinistro por cliente\n4 - Listar veículos por cliente\n5 - Listar veículo por seguradoras\n0 - Voltar";
-    private Operacao menuAtual;
+    private MenuOperacoes menuAtual;
     private ArrayList<Seguradora> listaSeguradoras;
     private Seguradora seguradoraAtual;
     private Scanner scanner;
@@ -33,7 +33,7 @@ public class Menu {
         // } else {
         this.listaSeguradoras = listaSeguradoras;
         this.seguradoraAtual = listaSeguradoras.get(0);
-        this.menuAtual = Operacao.INICIAL;
+        this.menuAtual = MenuOperacoes.INICIAL;
     }
 
     private ArrayList<Seguradora> inicializar() {
@@ -62,30 +62,30 @@ public class Menu {
     }
 
     public void executar(int operacao) {
-        executarFuncao(Operacao.getEnum(10 * menuAtual.getOperacao() + operacao));
+        executarFuncao(MenuOperacoes.getEnum(10 * menuAtual.getMenuOperacoes() + operacao));
     }
 
     private void imprimirMenu() {
-        if (menuAtual == Operacao.INICIAL) {
+        if (menuAtual == MenuOperacoes.INICIAL) {
             System.out.println("======= MENU DA SEGURADORA " + seguradoraAtual.getNome() + " =======");
             System.out.println(divisor);
             System.out.println(menuInicial);
-        } else if (menuAtual == Operacao.CADASTRAR) {
+        } else if (menuAtual == MenuOperacoes.CADASTRAR) {
             System.out.println(menuCadastrar);
-        } else if (menuAtual == Operacao.EDITAR) {
+        } else if (menuAtual == MenuOperacoes.EDITAR) {
             System.out.println(menuEditar);
-        } else if (menuAtual == Operacao.EXCLUIR) {
+        } else if (menuAtual == MenuOperacoes.EXCLUIR) {
             System.out.println(menuExcluir);
-        } else if (menuAtual == Operacao.VISUALIZAR) {
+        } else if (menuAtual == MenuOperacoes.VISUALIZAR) {
             System.out.println(menuVisualizar);
         }
     }
 
-    private void executarFuncao(Operacao operacao) {
+    private void executarFuncao(MenuOperacoes operacao) {
         Cliente cliente;
         switch (operacao) {
             case INICIAL:
-                if (menuAtual == Operacao.INICIAL) {
+                if (menuAtual == MenuOperacoes.INICIAL) {
                     System.exit(0);
                 }
                 setMenuAtual(operacao);
@@ -94,6 +94,7 @@ public class Menu {
             case EDITAR:
             case EXCLUIR:
             case VISUALIZAR:
+                // Nesse caso, a unica operação realizada é a mudança do menu atual
                 System.out.println(divisor);
                 setMenuAtual(operacao);
                 break;
@@ -136,15 +137,23 @@ public class Menu {
                 break;
 
             case CADASTRAR_CLIENTEPF:
-                System.out.println("======= Cadastrando cliente com CPF =======");
-                seguradoraAtual.cadastrarCliente(Construtor.criarClientePF());
-                System.out.println(divisor);
+                try {
+                    System.out.println("======= Cadastrando cliente com CPF =======");
+                    seguradoraAtual.cadastrarCliente(Construtor.criarClientePF());
+                    System.out.println(divisor);
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
                 break;
 
             case CADASTRAR_CLIENTEPJ:
-                System.out.println("======= Cadastrando cliente com CNPJ =======");
-                seguradoraAtual.cadastrarCliente(Construtor.criarClientePJ());
-                System.out.println(divisor);
+                try {
+                    System.out.println("======= Cadastrando cliente com CNPJ =======");
+                    seguradoraAtual.cadastrarCliente(Construtor.criarClientePJ());
+                    System.out.println(divisor);
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
                 break;
 
             case CADASTRAR_VEICULO:
@@ -282,7 +291,7 @@ public class Menu {
         }
     }
 
-    public void setMenuAtual(Operacao menu) {
+    public void setMenuAtual(MenuOperacoes menu) {
         menuAtual = menu;
     }
 

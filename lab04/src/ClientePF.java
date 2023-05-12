@@ -19,12 +19,18 @@ public class ClientePF extends Cliente {
 
         super(nome, endereco);
 
-        this.dataLicenca = dataLicenca;
+        if (Validacao.validarData(dataLicenca)) {
+            this.dataLicenca = dataLicenca;
+        }
         this.educacao = educacao;
         this.genero = genero;
         this.classeEconomica = classeEconomica;
         if (Validacao.validarData(dataNascimento)) {
-            this.dataNascimento = dataNascimento;
+            if (Validacao.validarIdade(dataNascimento)) {
+                this.dataNascimento = dataNascimento;
+            } else {
+                throw new Exception("Cliente tem menos que 18 anos");
+            }
         } else {
             throw new Exception("Data inserida é inválida");
         }
@@ -126,4 +132,28 @@ public class ClientePF extends Cliente {
                 + "\nData de nascimento: " + dataNascimento;
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        ClientePF other = (ClientePF) obj;
+        if (cpf == null) {
+            if (other.cpf != null)
+                return false;
+        } else if (!cpf.equals(other.cpf))
+            return false;
+        return true;
+    }
 }

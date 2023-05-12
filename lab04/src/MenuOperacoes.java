@@ -1,4 +1,4 @@
-public enum Operacao {
+public enum MenuOperacoes {
     CADASTRAR(1),
     CADASTRAR_CLIENTEPF(11),
     CADASTRAR_CLIENTEPJ(12),
@@ -28,20 +28,20 @@ public enum Operacao {
 
     private final int operacao;
 
-    Operacao(int operacao) {
+    MenuOperacoes(int operacao) {
         this.operacao = operacao;
     }
 
-    public int getOperacao() {
+    public int getMenuOperacoes() {
         return this.operacao;
     }
 
-    public static Operacao getEnum(int operacao) {
-        for (Operacao p : Operacao.values()) {
-            if (p.getOperacao() == operacao) {
+    public static MenuOperacoes getEnum(int operacao) {
+        for (MenuOperacoes p : MenuOperacoes.values()) {
+            if (p.getMenuOperacoes() == operacao) {
                 return p;
             }
         }
-        return Operacao.INICIAL;
+        return MenuOperacoes.INICIAL;
     }
 }
