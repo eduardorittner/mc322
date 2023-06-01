@@ -34,71 +34,105 @@ public class AppMain {
 
                         ClientePJ clientePJ = new ClientePJ("Milton LTDA.", "Rua dos abacates", "19-9999999",
                                         "milton@gmail.com", data, "03.778.130/0001-48");
+
                         seguradora.cadastrarCliente(clientePJ);
                         System.out.println("==== Novo ClientePJ criado ====");
                         System.out.println("===============================");
                         System.out.println(clientePJ);
                         System.out.println("===============================");
 
-                        clientePF.cadastrarVeiculo(new Veiculo("GUD4142", "Toyota", "Sedan", 2020));
+                        Frota frota = new Frota("frota bala");
+                        clientePJ.cadastrarFrota(frota);
+
+                        System.out.println("==== Nova frota criada ====");
+                        System.out.println("===============================");
+                        System.out.println(frota);
+                        System.out.println("===============================");
+
+                        Veiculo veiculoPF = new Veiculo("GUD4142", "Toyota", "Sedan", 2020);
+                        clientePF.cadastrarVeiculo(veiculoPF);
                         System.out.println("==== Veículo cadastrado no ClientePF ====");
                         System.out.println("===============================");
                         System.out.println(clientePF.getVeiculo("GUD4142"));
                         System.out.println("===============================");
 
-                        // clientePJ.cadastrarVeiculo(new Veiculo("DIK1234", "Honda", "Civic", 2020));
-                        // System.out.println("==== Veículo cadastrado no ClientePJ ====");
-                        // System.out.println("===============================");
-                        // System.out.println(clientePJ.getVeiculo("DIK1234"));
-                        // System.out.println("===============================");
+                        frota.addVeiculo(new Veiculo("DIK1234", "Honda", "Civic", 2020));
+                        System.out.println("==== Veículo cadastrado na frota do ClientePJ ====");
+                        System.out.println("===============================");
+                        System.out.println(frota.getVeiculo("DIK1234"));
+                        System.out.println("===============================");
 
-                        // seguradora.cadastrarSinistro(new Sinistro(new Date(), "Rua do sinistro",
-                        // seguradora,
-                        // clientePF.getVeiculo("GUD4142"), clientePF));
-                        // System.out.println("==== Novo sinistro gerado no ClientePF ====");
-                        // System.out.println("===============================");
-                        // seguradora.visualizarSinistro("45878931885");
-                        // System.out.println("===============================");
+                        ArrayList<Condutor> listaCondutoresPF = new ArrayList<>();
+                        Condutor condutorPF = new Condutor("46775872801", "Rafael", "19999999999",
+                                        "Rua dos Condutores, 123", "condutor@gmail.com", data);
+                        listaCondutoresPF.add(condutorPF);
 
-                        // seguradora.cadastrarSinistro(new Sinistro(new Date(), "Rua do sinistro",
-                        // seguradora,
-                        // clientePJ.getVeiculo("DIK1234"), clientePJ));
-                        // System.out.println("==== Novo sinistro gerado no ClientePJ ====");
-                        // System.out.println("===============================");
-                        // seguradora.visualizarSinistro("26.774.450/0001-25");
+                        System.out.println("==== Novo condutor criado ====");
+                        System.out.println("===============================");
+                        System.out.println(condutorPF);
+                        System.out.println("===============================");
+
+                        SeguroPF seguroPF = new SeguroPF(data, data, seguradora, listaCondutoresPF, veiculoPF,
+                                        clientePF);
+                        seguradora.cadastrarSeguro(seguroPF);
+
+                        System.out.println("==== Novo seguro PF criado ====");
+                        System.out.println("===============================");
+                        System.out.println(seguroPF);
+                        System.out.println("===============================");
+
+                        ArrayList<Condutor> listaCondutoresPJ = new ArrayList<>();
+                        Condutor condutorPJ = new Condutor("15463069867", "Ronaldo", "19999999999",
+                                        "Rua dos Condutores, 123", "condutor@gmail.com", data);
+                        listaCondutoresPJ.add(condutorPJ);
+
+                        System.out.println("==== Novo condutor criado ====");
+                        System.out.println("===============================");
+                        System.out.println(condutorPJ);
+                        System.out.println("===============================");
+
+                        SeguroPJ seguroPJ = new SeguroPJ(data, data, seguradora, listaCondutoresPJ, frota, clientePJ);
+                        seguradora.cadastrarSeguro(seguroPJ);
+
+                        System.out.println("==== Novo seguro PJ criado ====");
+                        System.out.println("===============================");
+                        System.out.println(seguroPJ);
+                        System.out.println("===============================");
+
+                        Sinistro sinistroPF = new Sinistro(data, "Rua do sinistro", condutorPF, seguroPF);
+                        seguroPF.cadastrarSinistro(sinistroPF, condutorPF);
+
+                        System.out.println("==== Novo sinistro cadastrado no seguro PF ====");
+                        System.out.println("===============================");
+                        System.out.println(sinistroPF);
+                        System.out.println("===============================");
+
+                        Sinistro sinistroPJ = new Sinistro(data, "Rua do sinistro", condutorPJ, seguroPJ);
+                        seguroPJ.cadastrarSinistro(sinistroPJ, condutorPJ);
+
+                        System.out.println("==== Novo sinistro cadastrado no seguro PJ ====");
+                        System.out.println("===============================");
+                        System.out.println(sinistroPJ);
+                        System.out.println("===============================");
 
                         System.out.println("==== Listar Clientes ====");
                         System.out.println("===============================");
                         System.out.println(seguradora.listarClientes());
                         System.out.println("===============================");
 
-                        System.out.println("==== Visualizar sinistro ====");
+                        System.out.println("==== Visualizar sinistro do condutor PF ====");
                         System.out.println("===============================");
-                        // TODO
-                        // seguradora.visualizarSinistro("26.774.450/0001-25");
-                        System.out.println("===============================");
-
-                        System.out.println("==== Listar Sinistros ====");
-                        System.out.println("===============================");
-                        System.out.println(seguradora.listarSinistros());
+                        System.out.println(seguroPF.getSinistro(sinistroPF.getId()));
                         System.out.println("===============================");
 
-                        System.out.println("==== Calcula Preço Seguro (Juvenaldo) ====");
+                        System.out.println("==== Listar Sinistros por cliente ====");
                         System.out.println("===============================");
-                        // TODO
-                        // System.out.println(seguradora.calculaPrecoSeguroCliente(clientePF));
-                        System.out.println("===============================");
-
-                        System.out.println("==== Calcula Preço Seguro (Milton LTDA) ====");
-                        System.out.println("===============================");
-                        // TODO
-                        // System.out.println(seguradora.calculaPrecoSeguroCliente(clientePJ));
+                        seguradora.imprimeSegurosPorCliente();
                         System.out.println("===============================");
 
                         System.out.println("==== Calcula receita ====");
                         System.out.println("===============================");
-                        // TODO
-                        // System.out.println(seguradora.calculaReceita());
+                        System.out.println(seguradora.calculaReceita());
                         System.out.println("===============================");
 
                         Menu menu = new Menu(listaSeguradoras);

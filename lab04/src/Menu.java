@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.text.SimpleDateFormat;
-// TODO tirar import de date
-import java.util.Date;
 
 public class Menu {
 

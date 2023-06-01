@@ -11,10 +11,9 @@ public abstract class Seguro {
     private Seguradora seguradora;
     ArrayList<Sinistro> listaSinistros;
     ArrayList<Condutor> listaCondutores;
-    private int valorMensal;
+    double valorMensal;
 
-    public Seguro(Date dataInicio, Date dataFinal, Seguradora seguradora, ArrayList<Condutor> listaCondutores,
-            int valorMensal) {
+    public Seguro(Date dataInicio, Date dataFinal, Seguradora seguradora, ArrayList<Condutor> listaCondutores) {
 
         this.id = gerarId();
         this.dataInicio = dataInicio;
@@ -22,7 +21,88 @@ public abstract class Seguro {
         this.seguradora = seguradora;
         this.listaSinistros = new ArrayList<Sinistro>();
         this.listaCondutores = listaCondutores;
-        this.valorMensal = valorMensal;
+        this.valorMensal = 0.0;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    abstract double calcularValor();
+
+    abstract Cliente getCliente();
+
+    Condutor getCondutor(String cpf) throws Exception {
+        for (Condutor condutor : listaCondutores) {
+            if (condutor.getCpf().equals(cpf)) {
+                return condutor;
+            }
+        }
+        throw new Exception("Condutor não encontrado.");
+    }
+
+    ArrayList<Condutor> getListaCondutores() {
+        return listaCondutores;
+    }
+
+    ArrayList<Sinistro> getListaSinistros() {
+        return listaSinistros;
+    }
+
+    public void getSinistrosPorCondutor() {
+        for (Condutor condutor : listaCondutores) {
+            System.out.println(condutor);
+            for (Sinistro sinistro : condutor.getListaSinistros()) {
+                System.out.println(sinistro);
+            }
+        }
+    }
+
+    public void getSinistrosPorCondutor(Condutor condutor) {
+        System.out.println(condutor);
+        for (Sinistro sinistro : condutor.getListaSinistros()) {
+            System.out.println(sinistro);
+        }
+    }
+
+    public Sinistro getSinistro(int id) {
+        for (Sinistro sinistro : listaSinistros) {
+            if (sinistro.getId() == id) {
+                return sinistro;
+            }
+        }
+
+        for (Condutor condutor : listaCondutores) {
+            for (Sinistro sinistro : listaSinistros) {
+                if (sinistro.getId() == id) {
+                    return sinistro;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public boolean cadastrarSinistro(Sinistro sinistro, Condutor condutor) {
+        if (!listaSinistros.contains(sinistro)) {
+            listaSinistros.add(sinistro);
+            if (!listaCondutores.contains(condutor)) {
+                condutor.adicionarSinistro(sinistro);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean removeSinistro(int id) {
+        for (Sinistro sinistro : listaSinistros) {
+            if (sinistro.getId() == id) {
+                listaSinistros.remove(sinistro);
+                listaIds.remove(id);
+                return true;
+            }
+        }
+        return false;
     }
 
     int qtdSinistrosCondutores() {
@@ -32,8 +112,6 @@ public abstract class Seguro {
         }
         return sinistros;
     }
-
-    abstract double calcularValor();
 
     private int gerarId() {
         int id;
@@ -89,11 +167,11 @@ public abstract class Seguro {
         this.seguradora = seguradora;
     }
 
-    public int getValorMensal() {
+    public double getValorMensal() {
         return valorMensal;
     }
 
-    public void setValorMensal(int valorMensal) {
+    public void setValorMensal(double valorMensal) {
         this.valorMensal = valorMensal;
     }
 
@@ -104,6 +182,14 @@ public abstract class Seguro {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "\nId: " + id + "\nValor mensal: " + valorMensal + "\nSeguradora: " + seguradora.getNome()
+                + "\nQuantidade de condutores: " + listaCondutores.size() + "\nQuantidade de sinistros: "
+                + listaSinistros.size();
+
     }
 
 }

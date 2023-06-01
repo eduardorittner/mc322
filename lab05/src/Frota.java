@@ -19,6 +19,15 @@ public class Frota {
         return this.code;
     }
 
+    public Veiculo getVeiculo(String placa) {
+        for (Veiculo veiculo : listaVeiculos) {
+            if (veiculo.getPlaca().equals(placa)) {
+                return veiculo;
+            }
+        }
+        return null;
+    }
+
     public ArrayList<Veiculo> getListaVeiculos() {
         return listaVeiculos;
     }
@@ -41,6 +50,12 @@ public class Frota {
             return true;
         }
         return false;
+    }
+
+    @Override
+
+    public String toString() {
+        return "Nome: " + code + "\nQuantidade de Veiculos: " + listaVeiculos.size();
     }
 
 }

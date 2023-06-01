@@ -9,7 +9,7 @@ public class Condutor {
     private String email;
     private Date dataNascimento;
     private ArrayList<Sinistro> listaSinistros;
-    static ArrayList<String> listaCpfs;
+    static ArrayList<String> listaCpfs = new ArrayList<>();
 
     public Condutor(String cpf, String nome, String telefone, String endereco, String email, Date dataNascimento)
             throws Exception {
@@ -22,10 +22,10 @@ public class Condutor {
         if (!Validacao.validarNome(nome)) {
             throw new Exception("Nome inserido não é válido");
         }
-        if (Validacao.validarTelefone(telefone)) {
+        if (!Validacao.validarTelefone(telefone)) {
             throw new Exception("Telefone inserido não é válido. (Somente numerais)");
         }
-        if (Validacao.validarData(dataNascimento)) {
+        if (!Validacao.validarData(dataNascimento)) {
             throw new Exception("A data de nascimento inserida não é válida.");
         }
         this.cpf = cpf;
@@ -34,6 +34,7 @@ public class Condutor {
         this.dataNascimento = dataNascimento;
         this.endereco = endereco;
         this.email = email;
+        this.listaSinistros = new ArrayList<Sinistro>();
     }
 
     public boolean adicionarSinistro(Sinistro sinistro) {
@@ -90,6 +91,12 @@ public class Condutor {
 
     public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
+    }
+
+    @Override
+    public String toString() {
+        return "Nome: " + nome + "\nCpf: " + cpf + "\nEmail: " + email + "\nTelefone: " + telefone
+                + "\nNúmero de sinistros: " + listaSinistros.size();
     }
 
 }

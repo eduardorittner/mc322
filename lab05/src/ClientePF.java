@@ -19,6 +19,7 @@ public class ClientePF extends Cliente {
 
         this.educacao = educacao;
         this.genero = genero;
+        this.listaVeiculos = new ArrayList<>();
 
         if (Validacao.validarData(dataNascimento)) {
             if (Validacao.validarIdade(dataNascimento)) {

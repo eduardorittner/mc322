@@ -132,8 +132,7 @@ public class Validacao {
     }
 
     public static boolean validarTelefone(String telefone) {
-        // TODO testar
-        return telefone.matches("^[\\d]");
+        return telefone.matches("[0-9]+");
 
     }
 

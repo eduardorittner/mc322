@@ -6,8 +6,11 @@ public class SeguroPF extends Seguro {
     private ClientePF cliente;
 
     public SeguroPF(Date dataInicio, Date dataFinal, Seguradora seguradora, ArrayList<Condutor> listaCondutores,
-            int valorMensal, Veiculo veiculo, ClientePF cliente) throws Exception {
-        super(dataInicio, dataFinal, seguradora, listaCondutores, valorMensal);
+            Veiculo veiculo, ClientePF cliente) throws Exception {
+        super(dataInicio, dataFinal, seguradora, listaCondutores);
+        this.veiculo = veiculo;
+        this.cliente = cliente;
+        super.setValorMensal(calcularValor());
 
         if (dataInicio.after(dataFinal)) {
             throw new Exception("Data final deve ser depois da data inicial.");
@@ -18,9 +21,10 @@ public class SeguroPF extends Seguro {
         if (valorMensal <= 0) {
             throw new Exception("Valor mensal tem que ser maior que 0.");
         }
+    }
 
-        this.veiculo = veiculo;
-        this.cliente = cliente;
+    public Cliente getCliente() {
+        return cliente;
     }
 
     public double calcularValor() {
@@ -29,8 +33,15 @@ public class SeguroPF extends Seguro {
         int qtdSinistrosCliente = listaSinistros.size();
         int qtdSinistrosCondutores = qtdSinistrosCondutores();
         double valorBase = CalculoSeguro.VALOR_BASE.getFator();
-        double valor = (valorBase * fatorIdade * (1 + 1 / (qtdCarros + 2)) * (2 + qtdSinistrosCliente / 10)
+        double valorSeguro = (valorBase * fatorIdade * (1 + 1 / (qtdCarros + 2)) * (2 + qtdSinistrosCliente / 10)
                 * (5 + qtdSinistrosCondutores / 10));
+        super.setValorMensal(valorSeguro);
+        return valorSeguro;
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente: " + cliente.getNome() + "\nVeiculo: " + veiculo.getPlaca() + super.toString();
     }
 
 }

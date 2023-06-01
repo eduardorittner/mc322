@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 public class Construtor {
     private static Scanner scanner = new Scanner(System.in);
@@ -85,28 +86,73 @@ public class Construtor {
         return seguradora;
     }
 
-    // TODO
-    // public static Sinistro criarSinistro(Seguradora seguradora) {
-    // try {
-    // System.out.println("Data: dd-MM-yyyy");
-    // Date data = dateScanner.parse(scanner.nextLine());
-    // System.out.println("Endereco: ");
-    // String endereco = scanner.nextLine();
-    // System.out.println("Id do cliente: ");
-    // Cliente cliente = seguradora.getCliente(scanner.nextLine());
-    // System.out.println("Placa do veiculo: ");
-    // Veiculo veiculo = cliente.getVeiculo(scanner.nextLine());
-    // if (!cliente.listarVeiculos().contains(veiculo) ||
-    // !seguradora.listarClientes().contains(cliente)) {
-    // return null;
-    // }
-    // Sinistro sinistro = new Sinistro(data, endereco, seguradora, veiculo,
-    // cliente);
-    // return sinistro;
-    // } catch (Exception e) {
-    // return null;
-    // }
-    // }
+    public static SeguroPF criarSeguro(Seguradora seguradora, ClientePF cliente) {
+        try {
+            System.out.println("Placa do veículo: ");
+            String placa = scanner.next();
+            Veiculo veiculo = cliente.getVeiculo(placa);
+            System.out.println("Data de início: ");
+            Date dataInicio = dateScanner.parse(scanner.next());
+            System.out.println("Data de término: ");
+            Date dataFinal = dateScanner.parse(scanner.next());
+
+            ArrayList<Condutor> listaCondutores = new ArrayList<>();
+            System.out.println("Quer adicionar algum condutor? y/n");
+            String escolha = scanner.next();
+            while (escolha.equals("y")) {
+                Condutor condutor = Construtor.criarCondutor();
+                System.out.println("Quer adicionar mais um condutor? y/n");
+                escolha = scanner.next();
+            }
+            SeguroPF seguro = new SeguroPF(dataInicio, dataFinal, seguradora, listaCondutores, veiculo, cliente);
+            return seguro;
+
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
+    public static Condutor criarCondutor() {
+        try {
+            System.out.println("=== Cadastrando condutor ===");
+            System.out.println("Cpf: ");
+            String cpf = scanner.next();
+            System.out.println("Nome: ");
+            String nome = scanner.next();
+            System.out.println("Telefone: ");
+            String telefone = scanner.next();
+            System.out.println("Endereço: ");
+            String endereco = scanner.next();
+            System.out.println("Email: ");
+            String email = scanner.next();
+            System.out.println("Data de nascimento: (dd-MM-yyyy)");
+            Date dataNascimento = dateScanner.parse(scanner.next());
+            Condutor condutor = new Condutor(cpf, nome, telefone, endereco, email, dataNascimento);
+            return condutor;
+
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
+    public static Sinistro criarSinistro(Seguro seguro) {
+        try {
+            System.out.println("Data: dd-MM-yyyy");
+            Date data = dateScanner.parse(scanner.nextLine());
+            System.out.println("Endereço: ");
+            String endereco = scanner.next();
+            System.out.println("Cpf do condutor: ");
+            String cpf = scanner.next();
+            Condutor condutor = seguro.getCondutor(cpf);
+            Sinistro sinistro = new Sinistro(data, endereco, condutor, seguro);
+            return sinistro;
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
 
     public static Veiculo criarVeiculo() {
         try {
@@ -125,5 +171,11 @@ public class Construtor {
             System.out.println("Esta placa já está já registrada");
             return null;
         }
+    }
+
+    public static Frota criarFrota() {
+        System.out.println("Nome da frota: ");
+        String nome = scanner.next();
+        return new Frota(nome);
     }
 }

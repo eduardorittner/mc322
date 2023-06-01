@@ -24,6 +24,15 @@ public class ClientePJ extends Cliente {
         }
     }
 
+    public Frota getFrota(String id) {
+        for (Frota frota : listaFrotas) {
+            if (frota.getCode().equals(id)) {
+                return frota;
+            }
+        }
+        return null;
+    }
+
     public ArrayList<Frota> getListaFrotas() {
         return listaFrotas;
     }
@@ -44,10 +53,12 @@ public class ClientePJ extends Cliente {
         return true;
     }
 
-    public boolean removerFrota(Frota frota) {
-        if (listaFrotas.contains(frota)) {
-            listaFrotas.remove(frota);
-            return true;
+    public boolean removerFrota(String id) {
+        for (Frota frota : listaFrotas) {
+            if (frota.getCode().equals(id)) {
+                listaFrotas.remove(frota);
+                return true;
+            }
         }
         return false;
     }
@@ -63,32 +74,33 @@ public class ClientePJ extends Cliente {
                 return true;
             }
         }
+        if (comando.equals("limpar")) {
+            listaFrotas.remove(frota);
+            return true;
+        }
         return false;
     }
 
-    public boolean getVeiculosPorFrota(Frota frota) {
-        try {
-            for (Veiculo veiculo : frota.getListaVeiculos()) {
-                System.out.println(veiculo);
+    public boolean removerVeiculo(String placa) {
+        for (Frota frota : listaFrotas) {
+            Veiculo veiculo = frota.getVeiculo(placa);
+            if (veiculo != null) {
+                return atualizarFrota(frota, "remover", veiculo);
             }
-            return true;
-        } catch (Exception e) {
-            return false;
         }
+        return false;
     }
 
-    public boolean getVeiculosPorFrota() {
-        try {
-            for (Frota frota : listaFrotas) {
-                for (Veiculo veiculo : frota.getListaVeiculos()) {
-                    System.out.println(veiculo);
+    public ArrayList<Veiculo> getVeiculosPorFrota(String nomeFrota) {
+        return getFrota(nomeFrota).getListaVeiculos();
+    }
 
-                }
-            }
-            return true;
-        } catch (Exception e) {
-            return false;
+    public ArrayList<Veiculo> getVeiculosPorFrota() {
+        ArrayList<Veiculo> listaVeiculos = new ArrayList<>();
+        for (Frota frota : listaFrotas) {
+            listaVeiculos.addAll(frota.getListaVeiculos());
         }
+        return listaVeiculos;
     }
 
     public int getIdade() {
