@@ -29,9 +29,9 @@ public class SeguroPF extends Seguro {
 
     public double calcularValor() {
         double fatorIdade = cliente.getFatorIdade();
-        int qtdCarros = cliente.listarVeiculos().size();
-        int qtdSinistrosCliente = listaSinistros.size();
-        int qtdSinistrosCondutores = qtdSinistrosCondutores();
+        double qtdCarros = cliente.listarVeiculos().size();
+        double qtdSinistrosCliente = listaSinistros.size();
+        double qtdSinistrosCondutores = qtdSinistrosCondutores();
         double valorBase = CalculoSeguro.VALOR_BASE.getFator();
         double valorSeguro = (valorBase * fatorIdade * (1 + 1 / (qtdCarros + 2)) * (2 + qtdSinistrosCliente / 10)
                 * (5 + qtdSinistrosCondutores / 10));

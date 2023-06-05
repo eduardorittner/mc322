@@ -30,6 +30,15 @@ public abstract class Seguro {
 
     abstract double calcularValor();
 
+    public double getValorMensal() {
+        calcularValor();
+        return valorMensal;
+    }
+
+    public void setValorMensal(double valorMensal) {
+        this.valorMensal = valorMensal;
+    }
+
     abstract Cliente getCliente();
 
     Condutor getCondutor(String cpf) throws Exception {
@@ -167,18 +176,12 @@ public abstract class Seguro {
         this.seguradora = seguradora;
     }
 
-    public double getValorMensal() {
-        return valorMensal;
-    }
-
-    public void setValorMensal(double valorMensal) {
-        this.valorMensal = valorMensal;
-    }
-
-    public boolean gerarSinistro(Condutor condutor, Date data, String endereco) {
-        Sinistro sinistro = new Sinistro(data, endereco, condutor, this);
-        listaSinistros.add(sinistro);
-        if (condutor.adicionarSinistro(sinistro)) {
+    public boolean gerarSinistro(Sinistro sinistro) {
+        if (sinistro.getCondutor() == null) {
+            listaSinistros.add(sinistro);
+            return true;
+        }
+        if (sinistro.getCondutor().adicionarSinistro(sinistro)) {
             return true;
         }
         return false;

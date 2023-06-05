@@ -20,11 +20,11 @@ public class SeguroPJ extends Seguro {
 
     public double calcularValor() {
         double valorBase = CalculoSeguro.VALOR_BASE.getFator();
-        int qtdFuncionarios = listaCondutores.size();
-        int qtdVeiculos = cliente.qtdTotalVeiculos();
-        int qtdSinistrosCliente = listaSinistros.size();
-        int qtdSinistrosCondutores = qtdSinistrosCondutores();
-        int anosPosFundacao = cliente.getIdade();
+        double qtdFuncionarios = listaCondutores.size();
+        double qtdVeiculos = cliente.qtdTotalVeiculos();
+        double qtdSinistrosCliente = listaSinistros.size();
+        double qtdSinistrosCondutores = qtdSinistrosCondutores();
+        double anosPosFundacao = cliente.getIdade();
         double valorSeguro = (valorBase * (10 + qtdFuncionarios / 10) * (1 + 1 / (qtdVeiculos + 2))
                 * (1 + 1 / (anosPosFundacao + 2)) * (2 + qtdSinistrosCliente / 10) * (2 + qtdSinistrosCondutores / 10));
         super.setValorMensal(valorSeguro);

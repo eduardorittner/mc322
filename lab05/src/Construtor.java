@@ -86,6 +86,30 @@ public class Construtor {
         return seguradora;
     }
 
+    public static SeguroPJ criarSeguro(Seguradora seguradora, ClientePJ cliente, Frota frota) {
+        try {
+            System.out.println("Data de início: ");
+            Date dataInicio = dateScanner.parse(scanner.next());
+            System.out.println("Data de término: ");
+            Date dataFinal = dateScanner.parse(scanner.next());
+
+            ArrayList<Condutor> listaCondutores = new ArrayList<>();
+            System.out.println("Quer adicionar algum condutor? y/n");
+            String escolha = scanner.next();
+            while (escolha.equals("y")) {
+                Condutor condutor = Construtor.criarCondutor();
+                System.out.println("Quer adicionar mais um condutor? y/n");
+                escolha = scanner.next();
+            }
+            SeguroPJ seguro = new SeguroPJ(dataInicio, dataFinal, seguradora, listaCondutores, frota, cliente);
+            return seguro;
+
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
     public static SeguroPF criarSeguro(Seguradora seguradora, ClientePF cliente) {
         try {
             System.out.println("Placa do veículo: ");
@@ -143,6 +167,11 @@ public class Construtor {
             Date data = dateScanner.parse(scanner.nextLine());
             System.out.println("Endereço: ");
             String endereco = scanner.next();
+            System.out.println("O titular estava envolvido no sinistro? y/n");
+            if (scanner.next().equals("y")) {
+                Sinistro sinistro = new Sinistro(data, endereco, null, seguro);
+                return sinistro;
+            }
             System.out.println("Cpf do condutor: ");
             String cpf = scanner.next();
             Condutor condutor = seguro.getCondutor(cpf);

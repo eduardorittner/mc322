@@ -4,7 +4,6 @@ import java.util.Random;
 public class Frota {
     private String code;
     private ArrayList<Veiculo> listaVeiculos;
-    private static ArrayList<Integer> listaIds;
 
     public Frota(String code) {
         this.code = code;

@@ -4,12 +4,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
-// TODO declarar variaveis auxiliares no começo pra poder reutilizar os nomes
-
 public class Menu {
 
     private String divisor = "=====================================";
-    private String menuInicial = "1 - Cadastrar\n2 - Excluir\n3 - Visualizar\n4 - Gerar Sinistro\n5 - Calcular receita\n6 - Calcular seguro\n7 - Transferir seguro\n8 - Selecionar seguradora\n0 - Sair";
+    private String menuInicial = "1 - Cadastrar\n2 - Excluir\n3 - Visualizar\n4 - Gerar Sinistro\n5 - Calcular receita\n6 - Calcular seguro\n7 - Selecionar seguradora\n0 - Sair";
     private String menuCadastrar = "======= MENU CADASTRAR =======\n" + divisor
             + "\n1 - Cadastrar cliente PF\n2 - Cadastrar cliente PJ\n3 - Cadastrar seguro PF\n4 - Cadastrar seguro PJ\n5 - Cadastrar condutor\n6 - Cadastrar veiculo\n7 - Cadastrar seguradora\n8 - Cadastrar frota\n0 - Voltar";
     private String menuExcluir = "======= MENU EXCLUIR =======\n" + divisor
@@ -109,43 +107,31 @@ public class Menu {
                 break;
 
             case GERAR_SINISTRO:
-                // TODO Gerar sinistro
-                // System.out.println("======= Gerando sinistro =======");
-                // System.out.println("Qual o id do seguro?");
-                // String escolha = scanner.next();
-                // if (escolha.equals("seguro")) {
-                // System.out.println("Qual o id do seguro? ");
-                // int id = Integer.parseInt(scanner.next());
-                // Seguro seguro = seguradoraAtual.getSeguro(id);
-                // if (seguro == null) {
-                // System.out.println("Não existe seguro cadastrado com esse identificador.");
-                // } else {
-                // seguro.cadastrarSinistro(Construtor.criarSinistro(seguro));
-                // }
-                // } else {
-                // System.out.println("Qual é o cpf do condutor?");
-                // String cpf = scanner.next();
-                // Condutor condutor = seguradoraAtual.getCondutor(cpf);
-                // if (condutor == null) {
-                // System.out.println("Não existe condutor cadastrado com esse cpf.");
-                // } else {
-                // System.out.println("E")
-
-                // }
-
-                // }
-                // System.out.println(divisor);
+                System.out.println("======= Gerando sinistro =======");
+                System.out.println("Id do seguro: ");
+                seguro = seguradoraAtual.getSeguro(Integer.parseInt(scanner.next()));
+                Sinistro sinistro = Construtor.criarSinistro(seguro);
+                seguro.gerarSinistro(sinistro);
+                System.out.println(divisor);
                 break;
 
             case CALCULAR_RECEITA:
-                // TODO calcular receita
-                // System.out.println("======= Calculando a receita =======");
-                // System.out.println("Receita: " + seguradoraAtual.calculaReceita());
-                // System.out.println(divisor);
+                System.out.println("======= Calculando a receita =======");
+                System.out.println("Receita: " + seguradoraAtual.calculaReceita());
+                System.out.println(divisor);
                 break;
 
             case CALCULAR_SEGURO:
-                // TODO Calcular seguro
+                System.out.println("======= Calculando seguro =======");
+                System.out.println("Id do seguro: ");
+                seguro = seguradoraAtual.getSeguro(Integer.parseInt(scanner.next()));
+                if (seguro != null) {
+                    System.out.println(seguro.getValorMensal());
+                } else {
+                    System.out.println("Seguro não encontrado.");
+                }
+                System.out.println(divisor);
+
                 break;
 
             case CADASTRAR_CLIENTEPF:
@@ -156,16 +142,17 @@ public class Menu {
                 } catch (Exception e) {
                     System.out.println(e);
                 }
+                System.out.println(divisor);
                 break;
 
             case CADASTRAR_CLIENTEPJ:
                 try {
                     System.out.println("======= Cadastrando cliente com CNPJ =======");
                     seguradoraAtual.cadastrarCliente(Construtor.criarClientePJ());
-                    System.out.println(divisor);
                 } catch (Exception e) {
                     System.out.println(e);
                 }
+                System.out.println(divisor);
                 break;
 
             case CADASTRAR_SEGUROPF:
@@ -182,7 +169,18 @@ public class Menu {
                 break;
 
             case CADASTRAR_SEGUROPJ:
-                // TODO cadastrar seguropj
+                System.out.println("======= Cadastrando Seguro PJ =======");
+                System.out.println("Cnpj do cliente: ");
+                clientePJ = (ClientePJ) seguradoraAtual.getCliente(scanner.next());
+                if (clientePJ != null) {
+                    System.out.println("Nome da frota: ");
+                    frota = seguradoraAtual.getFrota(scanner.next());
+                    seguroPJ = Construtor.criarSeguro(seguradoraAtual, clientePJ, frota);
+                    seguradoraAtual.cadastrarSeguro(seguroPJ);
+                } else {
+                    System.out.println("Cliente não encontrado.");
+                }
+                System.out.println(divisor);
                 break;
 
             case CADASTRAR_CONDUTOR:
@@ -225,11 +223,10 @@ public class Menu {
                 break;
 
             case EXCLUIR_CLIENTE:
-                // TODO
-                // System.out.println("======= Excluindo cliente ========");
-                // System.out.println("Id do cliente: ");
-                // seguradoraAtual.removerCliente(scanner.next());
-                // System.out.println(divisor);
+                System.out.println("======= Excluindo cliente ========");
+                System.out.println("Id do cliente: ");
+                seguradoraAtual.removerCliente(scanner.next());
+                System.out.println(divisor);
                 break;
 
             case EXCLUIR_VEICULO:
@@ -366,13 +363,14 @@ public class Menu {
                 HashMap<Cliente, ArrayList<Sinistro>> sinistrosPorCliente = seguradoraAtual.getSinistrosPorCliente();
                 for (Cliente clienteSinistro : sinistrosPorCliente.keySet()) {
                     System.out.println("==== " + clienteSinistro.getNome() + " ====");
-                    for (Sinistro sinistro : sinistrosPorCliente.get(clienteSinistro)) {
-                        System.out.println(sinistro);
+                    for (Sinistro sinistroCliente : sinistrosPorCliente.get(clienteSinistro)) {
+                        System.out.println(sinistroCliente);
                     }
                     System.out.println(divisor);
                 }
                 break;
         }
+
     }
 
     public void setMenuAtual(MenuOperacoes menu) {
