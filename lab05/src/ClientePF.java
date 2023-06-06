@@ -20,20 +20,16 @@ public class ClientePF extends Cliente {
         this.educacao = educacao;
         this.genero = genero;
         this.listaVeiculos = new ArrayList<>();
+        this.dataNascimento = dataNascimento;
+        this.cpf = cpf;
 
-        if (Validacao.validarData(dataNascimento)) {
-            if (Validacao.validarIdade(dataNascimento)) {
-                this.dataNascimento = dataNascimento;
-            } else {
-                throw new Exception("Cliente tem menos que 18 anos");
-            }
-        } else {
+        if (!Validacao.validarData(dataNascimento)) {
             throw new Exception("Data inserida é inválida");
         }
-
-        if (Validacao.validarCPF(cpf)) {
-            this.cpf = cpf;
-        } else {
+        if (!Validacao.validarIdade(dataNascimento)) {
+            throw new Exception("Cliente tem menos que 18 anos");
+        }
+        if (!Validacao.validarCPF(cpf)) {
             throw new Exception("Cpf inserido é inválido");
         }
     }
@@ -70,24 +66,12 @@ public class ClientePF extends Cliente {
         listaVeiculos.addAll(listaVeiculos);
     }
 
-    public ArrayList<Veiculo> listarVeiculos() {
+    public ArrayList<Veiculo> getListaVeiculos() {
         return listaVeiculos;
     }
 
     public void limparVeiculos() {
         listaVeiculos.clear();
-    }
-
-    public double getFatorIdade() {
-        int idade = getIdade();
-        if (idade < 30) {
-            return CalculoSeguro.FATOR_18_30.getFator();
-        } else if (idade < 60) {
-            return CalculoSeguro.FATOR_30_60.getFator();
-        } else {
-            return CalculoSeguro.FATOR_60_90.getFator();
-        }
-
     }
 
     public String getCpf() {
@@ -116,6 +100,17 @@ public class ClientePF extends Cliente {
 
     public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
+    }
+
+    public double getFatorIdade() {
+        int idade = getIdade();
+        if (idade < 30) {
+            return CalculoSeguro.FATOR_18_30.getFator();
+        } else if (idade < 60) {
+            return CalculoSeguro.FATOR_30_60.getFator();
+        } else {
+            return CalculoSeguro.FATOR_60_90.getFator();
+        }
     }
 
     public int getIdade() {

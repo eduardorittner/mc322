@@ -3,6 +3,23 @@ import java.util.concurrent.TimeUnit;
 
 public class Validacao {
 
+    public static boolean validarCNPJ(String cnpj) {
+        String aux_cnpj = cnpj.replaceAll("[^\\d]", "");
+
+        if (aux_cnpj.length() != 14) {
+            return false;
+        }
+
+        String digitosVerificadoresOriginais = aux_cnpj.substring(12);
+        String digitosVerificadoresCorretos = digitosVerificadoresCNPJ(aux_cnpj);
+        boolean digitosVerificadoresDiferentes = !(digitosVerificadoresOriginais.equals(digitosVerificadoresCorretos));
+        if (digitosVerificadoresDiferentes) {
+            return false;
+        }
+
+        return true;
+    }
+
     private static String digitosVerificadoresCNPJ(String cnpj) {
         int total = 0;
         int resto = 0;
@@ -44,15 +61,18 @@ public class Validacao {
         return resultado;
     }
 
-    public static boolean validarCNPJ(String cnpj) {
-        String aux_cnpj = cnpj.replaceAll("[^\\d]", "");
+    public static boolean validarCPF(String cpf) {
+        String aux_cpf = cpf.replaceAll("[^\\d]", "");
 
-        if (aux_cnpj.length() != 14) {
+        if (aux_cpf.length() != 11) {
+            return false;
+        }
+        if (cpfDigitosIguais(aux_cpf)) {
             return false;
         }
 
-        String digitosVerificadoresOriginais = aux_cnpj.substring(12);
-        String digitosVerificadoresCorretos = digitosVerificadoresCNPJ(aux_cnpj);
+        String digitosVerificadoresOriginais = aux_cpf.substring(9);
+        String digitosVerificadoresCorretos = digitosVerificadoresCPF(aux_cpf);
         boolean digitosVerificadoresDiferentes = !(digitosVerificadoresOriginais.equals(digitosVerificadoresCorretos));
         if (digitosVerificadoresDiferentes) {
             return false;
@@ -109,26 +129,6 @@ public class Validacao {
                 + (Integer.toString(segundo_digito_verificador));
 
         return resultado;
-    }
-
-    public static boolean validarCPF(String cpf) {
-        String aux_cpf = cpf.replaceAll("[^\\d]", "");
-
-        if (aux_cpf.length() != 11) {
-            return false;
-        }
-        if (cpfDigitosIguais(aux_cpf)) {
-            return false;
-        }
-
-        String digitosVerificadoresOriginais = aux_cpf.substring(9);
-        String digitosVerificadoresCorretos = digitosVerificadoresCPF(aux_cpf);
-        boolean digitosVerificadoresDiferentes = !(digitosVerificadoresOriginais.equals(digitosVerificadoresCorretos));
-        if (digitosVerificadoresDiferentes) {
-            return false;
-        }
-
-        return true;
     }
 
     public static boolean validarTelefone(String telefone) {

@@ -71,22 +71,6 @@ public class Seguradora {
         return false;
     }
 
-    public ArrayList<Cliente> listarClientes() {
-        return listaClientes;
-    }
-
-    public ArrayList<Cliente> listarClientes(String tipoCliente) {
-        ArrayList<Cliente> clientes = new ArrayList<Cliente>();
-        for (Cliente clienteAtual : listaClientes) {
-            // getCanonicalName retorna o nome da classe como uma string, que pode ser
-            // comparada diretamente com a string tipoCliente
-            if (clienteAtual.getClass().getCanonicalName().equals(tipoCliente)) {
-                clientes.add(clienteAtual);
-            }
-        }
-        return clientes;
-    }
-
     public boolean visualizarCliente(String idCliente) {
         Cliente cliente = getCliente(idCliente);
         if (cliente != null) {

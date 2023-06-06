@@ -16,11 +16,13 @@ public class ClientePJ extends Cliente {
         super(nome, endereco, telefone, email);
         this.dataFundacao = dataFundacao;
         this.listaFrotas = new ArrayList<Frota>();
+        this.cnpj = cnpj;
 
-        if (Validacao.validarCNPJ(cnpj)) {
-            this.cnpj = cnpj;
-        } else {
+        if (!Validacao.validarCNPJ(cnpj)) {
             throw new Exception("O cnpj inserido não é válido.");
+        }
+        if (!Validacao.validarData(dataFundacao)) {
+            throw new Exception("A data de fundação inserida não é válida");
         }
     }
 
@@ -31,18 +33,6 @@ public class ClientePJ extends Cliente {
             }
         }
         return null;
-    }
-
-    public ArrayList<Frota> getListaFrotas() {
-        return listaFrotas;
-    }
-
-    public void limpaListaFrotas() {
-        listaFrotas.clear();
-    }
-
-    public void concatenaListaFrotas(ArrayList<Frota> listaFrotas) {
-        this.listaFrotas.addAll(listaFrotas);
     }
 
     public boolean cadastrarFrota(Frota frota) {
@@ -61,6 +51,18 @@ public class ClientePJ extends Cliente {
             }
         }
         return false;
+    }
+
+    public ArrayList<Frota> getListaFrotas() {
+        return listaFrotas;
+    }
+
+    public void limpaListaFrotas() {
+        listaFrotas.clear();
+    }
+
+    public void concatenaListaFrotas(ArrayList<Frota> listaFrotas) {
+        this.listaFrotas.addAll(listaFrotas);
     }
 
     public boolean atualizarFrota(Frota frota, String comando, Veiculo veiculo) {
@@ -103,6 +105,14 @@ public class ClientePJ extends Cliente {
         return listaVeiculos;
     }
 
+    public Date getDataFundacao() {
+        return dataFundacao;
+    }
+
+    public void setDataFundacao(Date dataFundacao) {
+        this.dataFundacao = dataFundacao;
+    }
+
     public int getIdade() {
         Date dataAtual = new Date();
         Date data = dataFundacao;
@@ -123,14 +133,6 @@ public class ClientePJ extends Cliente {
     @Override
     public String getCadastroPessoal() {
         return cnpj.replaceAll("[^\\d]", "");
-    }
-
-    public Date getDataFundacao() {
-        return dataFundacao;
-    }
-
-    public void setDataFundacao(Date dataFundacao) {
-        this.dataFundacao = dataFundacao;
     }
 
     @Override

@@ -83,8 +83,8 @@ public class Sinistro {
 
     @Override
     public String toString() {
-        return "Sinistro " + id + "\nData: " + data + "\nEndereço: " + endereco + "\nCondutor: " + condutor.getCpf()
-                + "\nSeguro: " + seguro.getId();
+        return "Sinistro " + id + "\nCondutor: " + "\nSeguro: " + seguro.getId() + condutor.getCpf() + "\nData: " + data
+                + "\nEndereço: " + endereco;
     }
 
     @Override

@@ -187,7 +187,11 @@ public class Menu {
                 System.out.println("======= Cadastrando condutor =======");
                 System.out.println("Id do seguro: ");
                 seguro = seguradoraAtual.getSeguro(Integer.parseInt(scanner.next()));
-                seguro.autorizarCondutor(Construtor.criarCondutor());
+                if (seguro != null) {
+                    seguro.autorizarCondutor(Construtor.criarCondutor());
+                } else {
+                    System.out.println("Seguro não encontrado.");
+                }
 
                 break;
 
@@ -305,7 +309,7 @@ public class Menu {
 
             case LISTAR_CLIENTE_SEGURADORA:
                 System.out.println("======= Listando clientes por seguradora ========");
-                ArrayList<Cliente> listaClientes = seguradoraAtual.listarClientes();
+                ArrayList<Cliente> listaClientes = seguradoraAtual.getListaClientes();
                 for (Cliente clienteAux : listaClientes) {
                     System.out.println(clienteAux);
                     System.out.println(divisor);
@@ -339,7 +343,7 @@ public class Menu {
                 cliente = seguradoraAtual.getCliente(scanner.next());
 
                 if (cliente instanceof ClientePF) {
-                    System.out.println(((ClientePF) cliente).listarVeiculos());
+                    System.out.println(((ClientePF) cliente).getListaVeiculos());
                 } else if (cliente instanceof ClientePJ) {
                     System.out.println(((ClientePJ) cliente).getVeiculosPorFrota());
                 } else {

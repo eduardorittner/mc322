@@ -10,12 +10,20 @@ public class Frota {
         listaVeiculos = new ArrayList<Veiculo>();
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public boolean addVeiculo(Veiculo veiculo) {
+        if (listaVeiculos.contains(veiculo)) {
+            return false;
+        }
+        listaVeiculos.add(veiculo);
+        return true;
     }
 
-    public String getCode() {
-        return this.code;
+    public boolean removeVeiculo(Veiculo veiculo) {
+        if (listaVeiculos.contains(veiculo)) {
+            listaVeiculos.remove(veiculo);
+            return true;
+        }
+        return false;
     }
 
     public Veiculo getVeiculo(String placa) {
@@ -35,26 +43,16 @@ public class Frota {
         listaVeiculos.clear();
     }
 
-    public boolean addVeiculo(Veiculo veiculo) {
-        if (listaVeiculos.contains(veiculo)) {
-            return false;
-        }
-        listaVeiculos.add(veiculo);
-        return true;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public boolean removeVeiculo(Veiculo veiculo) {
-        if (listaVeiculos.contains(veiculo)) {
-            listaVeiculos.remove(veiculo);
-            return true;
-        }
-        return false;
+    public String getCode() {
+        return this.code;
     }
 
     @Override
-
     public String toString() {
         return "Nome: " + code + "\nQuantidade de Veiculos: " + listaVeiculos.size();
     }
-
 }

@@ -25,6 +25,14 @@ public abstract class Cliente {
         this.nome = nome;
     }
 
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
     public String getEndereco() {
         return endereco;
     }
@@ -33,6 +41,13 @@ public abstract class Cliente {
         this.endereco = endereco;
     }
 
-    abstract public String getCadastroPessoal();
+    public String getEmail() {
+        return email;
+    }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    abstract public String getCadastroPessoal();
 }

@@ -33,7 +33,7 @@ public class AppMain {
                         System.out.println("===============================");
 
                         ClientePJ clientePJ = new ClientePJ("Milton LTDA.", "Rua dos abacates", "19-9999999",
-                                        "milton@gmail.com", data, "03.778.130/0001-48");
+                                        "milton@gmail.com", data, "18.781.203/0001-28");
 
                         seguradora.cadastrarCliente(clientePJ);
                         System.out.println("==== Novo ClientePJ criado ====");
@@ -117,7 +117,7 @@ public class AppMain {
 
                         System.out.println("==== Listar Clientes ====");
                         System.out.println("===============================");
-                        System.out.println(seguradora.listarClientes());
+                        System.out.println(seguradora.getListaClientes());
                         System.out.println("===============================");
 
                         System.out.println("==== Visualizar sinistro do condutor PF ====");
@@ -125,7 +125,7 @@ public class AppMain {
                         System.out.println(seguroPF.getSinistro(sinistroPF.getId()));
                         System.out.println("===============================");
 
-                        System.out.println("==== Listar Sinistros por cliente ====");
+                        System.out.println("==== Listar Seguros por cliente ====");
                         System.out.println("===============================");
                         seguradora.imprimeSegurosPorCliente();
                         System.out.println("===============================");

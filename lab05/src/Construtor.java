@@ -68,7 +68,7 @@ public class Construtor {
             } catch (java.text.ParseException e) {
                 System.out.println("Data inserida possui formato inválido, tente novamente");
             } catch (Exception e) {
-                System.out.println("Cpf digitado é invalido, tente novamente.");
+                System.out.println(e);
             }
         }
     }

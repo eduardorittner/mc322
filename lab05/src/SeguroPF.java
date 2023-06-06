@@ -12,12 +12,6 @@ public class SeguroPF extends Seguro {
         this.cliente = cliente;
         super.setValorMensal(calcularValor());
 
-        if (dataInicio.after(dataFinal)) {
-            throw new Exception("Data final deve ser depois da data inicial.");
-        }
-        if (!Validacao.validarData(dataFinal)) {
-            throw new Exception("Data final do seguro não pode estar no passado.");
-        }
         if (valorMensal <= 0) {
             throw new Exception("Valor mensal tem que ser maior que 0.");
         }
@@ -29,7 +23,7 @@ public class SeguroPF extends Seguro {
 
     public double calcularValor() {
         double fatorIdade = cliente.getFatorIdade();
-        double qtdCarros = cliente.listarVeiculos().size();
+        double qtdCarros = cliente.getListaVeiculos().size();
         double qtdSinistrosCliente = listaSinistros.size();
         double qtdSinistrosCondutores = qtdSinistrosCondutores();
         double valorBase = CalculoSeguro.VALOR_BASE.getFator();

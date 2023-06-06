@@ -92,6 +92,17 @@ public abstract class Seguro {
         return null;
     }
 
+    public boolean gerarSinistro(Sinistro sinistro) {
+        if (sinistro.getCondutor() == null) {
+            listaSinistros.add(sinistro);
+            return true;
+        }
+        if (sinistro.getCondutor().adicionarSinistro(sinistro)) {
+            return true;
+        }
+        return false;
+    }
+
     public boolean cadastrarSinistro(Sinistro sinistro, Condutor condutor) {
         if (!listaSinistros.contains(sinistro)) {
             listaSinistros.add(sinistro);
@@ -122,16 +133,6 @@ public abstract class Seguro {
         return sinistros;
     }
 
-    private int gerarId() {
-        int id;
-        Random random = new Random();
-        do {
-            id = random.nextInt(0, 10000000);
-        } while (listaIds.contains(id));
-        listaIds.add(id);
-        return id;
-    }
-
     boolean autorizarCondutor(Condutor condutor) {
         if (!listaCondutores.contains(condutor)) {
             listaCondutores.add(condutor);
@@ -142,6 +143,9 @@ public abstract class Seguro {
 
     boolean desautorizarCondutor(Condutor condutor) {
         if (listaCondutores.contains(condutor)) {
+            return false;
+        }
+        if (!Condutor.removerCpf(condutor.getCpf())) {
             return false;
         }
         listaCondutores.remove(condutor);
@@ -176,15 +180,14 @@ public abstract class Seguro {
         this.seguradora = seguradora;
     }
 
-    public boolean gerarSinistro(Sinistro sinistro) {
-        if (sinistro.getCondutor() == null) {
-            listaSinistros.add(sinistro);
-            return true;
-        }
-        if (sinistro.getCondutor().adicionarSinistro(sinistro)) {
-            return true;
-        }
-        return false;
+    private int gerarId() {
+        int id;
+        Random random = new Random();
+        do {
+            id = random.nextInt(0, 10000000);
+        } while (listaIds.contains(id));
+        listaIds.add(id);
+        return id;
     }
 
     @Override

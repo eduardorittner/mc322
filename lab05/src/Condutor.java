@@ -53,6 +53,14 @@ public class Condutor {
         return cpf;
     }
 
+    public static boolean removerCpf(String cpf) {
+        if (listaCpfs.contains(cpf)) {
+            listaCpfs.remove(cpf);
+            return true;
+        }
+        return false;
+    }
+
     public String getNome() {
         return nome;
     }
