@@ -3,18 +3,13 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-// TODO Arrumar formatacao da data no tocsv
-
 public class ArquivoSeguro implements IArquivo {
 
-    private ArrayList<Seguro> listaSeguros;
-
-    public ArquivoSeguro(ArrayList<Seguro> listaSeguros) {
-        this.listaSeguros = listaSeguros;
-    }
-
-    public boolean gravarArquivo(String nomeArquivo) {
+    public boolean gravarArquivo(String nomeArquivo, ArrayList<?> listaObjetos) {
         // TODO como adicionar frotas/veiculos?
+
+        ArrayList<Seguro> listaSeguros = (ArrayList<Seguro>) listaObjetos;
+
         String colunas = "id;dataInicio;dataFim;seguradora;listaSinistros;listaCondutores;cliente;frota/veiculo;valorMensal";
         File arquivo = new File(nomeArquivo);
         try {
@@ -32,7 +27,7 @@ public class ArquivoSeguro implements IArquivo {
         return true;
     }
 
-    public String lerArquivo(String arquivo) {
-        return "false";
+    public ArrayList<?> lerArquivo(String arquivo) {
+        return null;
     }
 }

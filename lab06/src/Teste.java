@@ -20,9 +20,13 @@ public class Teste {
             clientePJ.cadastrarFrota(frota);
             ArrayList<Frota> listaFrotas = new ArrayList<Frota>();
             listaFrotas.add(frota);
-            ArquivoFrota arquivo = new ArquivoFrota(listaFrotas);
-            arquivo.gravarArquivo("uepa.csv");
-            System.out.println("Gravando arqiyuvo");
+            // ArquivoFrota arquivo = new ArquivoFrota(listaFrotas);
+            // arquivo.gravarArquivo("uepa.csv");
+            // System.out.println("Gravando arqiyuvo");
+
+            // ArquivoCondutor condutor = new ArquivoCondutor();
+            // condutor.lerArquivo("arquivos/condutores.csv");
+            // System.out.println(condutor.getListaCondutores());
         } catch (Exception e) {
             System.out.println("deuy bosta");
         }

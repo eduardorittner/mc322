@@ -135,18 +135,30 @@ public class AppMain {
                         System.out.println(seguradora.calculaReceita());
                         System.out.println("===============================");
 
+                        // TODO
                         System.out.println("==== Exportando seguros ====");
-                        ArquivoSeguro arquivoSeguro = new ArquivoSeguro(seguradora.getListaSeguros());
-                        arquivoSeguro.gravarArquivo("seguros.csv");
+                        ArquivoSeguro arquivoSeguro = new ArquivoSeguro();
+                        arquivoSeguro.gravarArquivo("seguros.csv", seguradora.getListaSeguros());
+                        System.out.println("===============================");
 
                         System.out.println("==== Exportando sinistros ====");
                         ArrayList<Sinistro> listaSinistros = new ArrayList<>();
                         for (Seguro seguro : seguradora.getListaSeguros()) {
                                 listaSinistros.addAll(seguro.getListaSinistros());
                         }
-                        ArquivoSinistro arquivoSinistro = new ArquivoSinistro(listaSinistros);
-                        arquivoSinistro.gravarArquivo("sinistros.csv");
+                        ArquivoSinistro arquivoSinistro = new ArquivoSinistro();
+                        arquivoSinistro.gravarArquivo("sinistros.csv", listaSinistros);
+                        System.out.println("===============================");
 
+                        System.out.println("==== Importando condutores ====");
+                        ArquivoCondutor arquivoCondutores = new ArquivoCondutor();
+                        System.out.println(arquivoCondutores.lerArquivo("arquivos/condutores.csv"));
+                        System.out.println("===============================");
+
+                        System.out.println("==== Importando veiculos ====");
+                        ArquivoVeiculo arquivoVeiculo = new ArquivoVeiculo();
+                        System.out.println(arquivoVeiculo.lerArquivo("arquivos/veiculos.csv"));
+                        System.out.println("===============================");
                         // TODO
                         // Menu menu = new Menu(listaSeguradoras);
                         // while (true) {

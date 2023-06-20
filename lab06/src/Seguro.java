@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
+import java.text.SimpleDateFormat;
 
 public abstract class Seguro {
 
@@ -191,8 +192,10 @@ public abstract class Seguro {
     }
 
     public String toCsv() {
-        return "\n" + id + ";" + dataInicio + ";" + dataFinal + ";" + seguradora.getNome() + ";" + sinistrosToCsv()
-                + ";" + condutoresToCsv() + ";";
+        SimpleDateFormat dateFormat = new SimpleDateFormat();
+
+        return "\n" + id + ";" + dateFormat.format(dataInicio) + ";" + dateFormat.format(dataFinal) + ";"
+                + seguradora.getNome() + ";" + sinistrosToCsv() + ";" + condutoresToCsv() + ";";
     }
 
     public String sinistrosToCsv() {

@@ -137,7 +137,7 @@ public class Validacao {
     }
 
     public static boolean validarNome(String nome) {
-        return nome != null && nome.matches("^[a-zA-ZÀ-ȩ]*$");
+        return nome != null;
     }
 
     public static boolean validarData(Date data) {

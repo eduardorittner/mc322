@@ -3,17 +3,11 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-// TODO Arrumar formatacao da data no tocsv
-
 public class ArquivoSinistro implements IArquivo {
 
-    private ArrayList<Sinistro> listaSinistros;
+    public boolean gravarArquivo(String nomeArquivo, ArrayList<?> listaObjetos) {
+        ArrayList<Sinistro> listaSinistros = (ArrayList<Sinistro>) listaObjetos;
 
-    public ArquivoSinistro(ArrayList<Sinistro> listaSinistros) {
-        this.listaSinistros = listaSinistros;
-    }
-
-    public boolean gravarArquivo(String nomeArquivo) {
         String colunas = "id;condutor;seguro;data;endereço";
         File arquivo = new File(nomeArquivo);
         try {
@@ -31,7 +25,7 @@ public class ArquivoSinistro implements IArquivo {
         return true;
     }
 
-    public String lerArquivo(String arquivo) {
-        return "false";
+    public ArrayList<?> lerArquivo(String arquivo) {
+        return null;
     }
 }

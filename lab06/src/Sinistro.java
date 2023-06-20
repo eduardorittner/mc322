@@ -2,6 +2,7 @@ import java.util.Random;
 import java.lang.Math;
 import java.util.ArrayList;
 import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class Sinistro {
     private final int id;
@@ -82,7 +83,9 @@ public class Sinistro {
     }
 
     public String toCsv() {
-        return "\n" + id + ";" + condutor.getCpf() + ";" + seguro.getId() + ";" + data.getTime() + ";" + endereco;
+
+        return "\n" + id + ";" + condutor.getCpf() + ";" + seguro.getId() + ";" + new SimpleDateFormat().format(data)
+                + ";" + endereco;
     }
 
     @Override
