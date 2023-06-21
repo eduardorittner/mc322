@@ -53,6 +53,6 @@ public class Frota {
 
     @Override
     public String toString() {
-        return "Nome: " + code + "\nQuantidade de Veiculos: " + listaVeiculos.size();
+        return "\nNome: " + code + "\nQuantidade de Veiculos: " + listaVeiculos.size();
     }
 }

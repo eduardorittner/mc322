@@ -137,7 +137,7 @@ public class ClientePJ extends Cliente {
 
     @Override
     public String toString() {
-        return "Nome: " + getNome() + "\nCNPJ: " + cnpj;
+        return "\nNome: " + getNome() + "\nCNPJ: " + cnpj + "\nNúmero de frotas: " + listaFrotas.size();
     }
 
     @Override

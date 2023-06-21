@@ -69,7 +69,6 @@ public class ArquivoClientePJ implements IArquivo {
                         for (Frota frota : listaFrotas) {
                             if (frota.getCode().equals(nomeFrota)) {
                                 cliente.cadastrarFrota(frota);
-                                listaFrotas.remove(frota);
                             }
                         }
                     }

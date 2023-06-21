@@ -39,6 +39,6 @@ public class SeguroPJ extends Seguro {
 
     @Override
     public String toString() {
-        return "Nome: " + cliente.getNome() + "\nFrota: " + frota.getCode() + super.toString();
+        return "\nNome: " + cliente.getNome() + "\nFrota: " + frota.getCode() + super.toString();
     }
 }

@@ -103,7 +103,7 @@ public class Condutor {
 
     @Override
     public String toString() {
-        return "Nome: " + nome + "\nCpf: " + cpf + "\nEmail: " + email + "\nTelefone: " + telefone
+        return "\nNome: " + nome + "\nCpf: " + cpf + "\nEmail: " + email + "\nTelefone: " + telefone
                 + "\nNúmero de sinistros: " + listaSinistros.size();
     }
 

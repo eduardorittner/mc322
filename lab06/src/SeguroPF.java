@@ -40,7 +40,7 @@ public class SeguroPF extends Seguro {
 
     @Override
     public String toString() {
-        return "Cliente: " + cliente.getNome() + "\nVeiculo: " + veiculo.getPlaca() + super.toString();
+        return "\nCliente: " + cliente.getNome() + "\nVeiculo: " + veiculo.getPlaca() + super.toString();
     }
 
 }

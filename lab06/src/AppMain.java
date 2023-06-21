@@ -167,7 +167,7 @@ public class AppMain {
                         System.out.println("==== Importando frotas ====");
                         ArquivoFrota arquivoFrota = new ArquivoFrota();
                         ArrayList<Frota> listaFrotas = (ArrayList<Frota>) arquivoFrota
-                                        .lerArquivo("arquivos/veiculos.csv");
+                                        .lerArquivo("arquivos/frotas.csv", listaVeiculos);
                         System.out.println(listaFrotas);
                         System.out.println("===============================");
 
