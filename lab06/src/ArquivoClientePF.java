@@ -8,8 +8,9 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 
 public class ArquivoClientePF implements IArquivo {
-    public boolean gravarArquivo(String nomeArquivo, ArrayList<?> listaObjetos) {
 
+    public boolean gravarArquivo(String nomeArquivo, ArrayList<?> listaObjetos) {
+        return false;
     }
 
     public ArrayList<?> lerArquivo(String nomeArquivo, ArrayList<Veiculo> listaVeiculos) {
@@ -30,14 +31,20 @@ public class ArquivoClientePF implements IArquivo {
                 String sexo = valores[5];
                 String ensino = valores[6];
                 Date dataNascimento = dateFormat.parse(valores[7]);
-                for (int i = 8; i < valores.length; i++) {
-                    // Para cada carro
-                    String placa = valores[i];
-
-                }
 
                 try {
+                    cliente = new ClientePF(nome, endereco, telefone, email, cpf, sexo, ensino, dataNascimento);
                     listaClientes.add(cliente);
+                    for (int i = 8; i < valores.length; i++) {
+                        // Para cada carro
+                        String placa = valores[i];
+                        for (Veiculo veiculo : listaVeiculos) {
+                            if (veiculo.getPlaca().equals(placa)) {
+                                cliente.cadastrarVeiculo(veiculo);
+                                listaVeiculos.remove(veiculo);
+                            }
+                        }
+                    }
                 } catch (Exception e) {
                 }
             }
@@ -66,13 +73,9 @@ public class ArquivoClientePF implements IArquivo {
                 String sexo = valores[5];
                 String ensino = valores[6];
                 Date dataNascimento = dateFormat.parse(valores[7]);
-                for (int i = 8; i < valores.length; i++) {
-                    // Para cada carro
-                    String placa = valores[i];
-
-                }
 
                 try {
+                    cliente = new ClientePF(nome, endereco, telefone, email, cpf, sexo, ensino, dataNascimento);
                     listaClientes.add(cliente);
                 } catch (Exception e) {
                 }

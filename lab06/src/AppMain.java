@@ -152,13 +152,39 @@ public class AppMain {
 
                         System.out.println("==== Importando condutores ====");
                         ArquivoCondutor arquivoCondutores = new ArquivoCondutor();
-                        System.out.println(arquivoCondutores.lerArquivo("arquivos/condutores.csv"));
+                        ArrayList<Condutor> listaCondutores = (ArrayList<Condutor>) arquivoCondutores
+                                        .lerArquivo("arquivos/condutores.csv");
+                        System.out.println(listaCondutores);
                         System.out.println("===============================");
 
                         System.out.println("==== Importando veiculos ====");
                         ArquivoVeiculo arquivoVeiculo = new ArquivoVeiculo();
-                        System.out.println(arquivoVeiculo.lerArquivo("arquivos/veiculos.csv"));
+                        ArrayList<Veiculo> listaVeiculos = (ArrayList<Veiculo>) arquivoVeiculo
+                                        .lerArquivo("arquivos/veiculos.csv");
+                        System.out.println(listaVeiculos);
                         System.out.println("===============================");
+
+                        System.out.println("==== Importando frotas ====");
+                        ArquivoFrota arquivoFrota = new ArquivoFrota();
+                        ArrayList<Frota> listaFrotas = (ArrayList<Frota>) arquivoFrota
+                                        .lerArquivo("arquivos/veiculos.csv");
+                        System.out.println(listaFrotas);
+                        System.out.println("===============================");
+
+                        System.out.println("==== Importando clientes PF ====");
+                        ArquivoClientePF arquivoClientePF = new ArquivoClientePF();
+                        ArrayList<ClientePF> listaClientesPF = (ArrayList<ClientePF>) arquivoClientePF
+                                        .lerArquivo("arquivos/clientesPF.csv", listaVeiculos);
+                        System.out.println(listaClientesPF);
+                        System.out.println("===============================");
+
+                        System.out.println("==== Importando clientes PJ ====");
+                        ArquivoClientePJ arquivoClientePJ = new ArquivoClientePJ();
+                        ArrayList<ClientePJ> listaClientesPJ = (ArrayList<ClientePJ>) arquivoClientePJ
+                                        .lerArquivo("arquivos/clientesPJ.csv", listaFrotas);
+                        System.out.println(listaClientesPJ);
+                        System.out.println("===============================");
+
                         // TODO
                         // Menu menu = new Menu(listaSeguradoras);
                         // while (true) {
