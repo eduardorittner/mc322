@@ -135,10 +135,66 @@ public class AppMain {
                         System.out.println(seguradora.calculaReceita());
                         System.out.println("===============================");
 
-                        // TODO
+                        System.out.println("==== Importando condutores ====");
+                        ArquivoCondutor arquivoCondutores = new ArquivoCondutor();
+                        ArrayList<Condutor> listaCondutores = (ArrayList<Condutor>) arquivoCondutores
+                                        .lerArquivo("./lab06/dados/condutores.csv");
+                        System.out.println(listaCondutores);
+                        System.out.println("===============================");
+
+                        System.out.println("==== Importando veiculos ====");
+                        ArquivoVeiculo arquivoVeiculo = new ArquivoVeiculo();
+                        ArrayList<Veiculo> listaVeiculos = (ArrayList<Veiculo>) arquivoVeiculo
+                                        .lerArquivo("./lab06/dados/veiculos.csv");
+                        System.out.println(listaVeiculos);
+                        System.out.println("===============================");
+
+                        System.out.println("==== Importando frotas ====");
+                        ArquivoFrota arquivoFrota = new ArquivoFrota();
+                        ArrayList<Frota> listaFrotas = (ArrayList<Frota>) arquivoFrota
+                                        .lerArquivo("./lab06/dados/frotas.csv", listaVeiculos);
+                        System.out.println(listaFrotas);
+                        // Cadastra frotas no primeiro clientePJ
+                        for (Frota _frota : listaFrotas) {
+                                clientePJ.cadastrarFrota(_frota);
+                        }
+                        System.out.println("===============================");
+
+                        System.out.println("==== Importando clientes PF ====");
+                        ArquivoClientePF arquivoClientePF = new ArquivoClientePF();
+                        ArrayList<ClientePF> listaClientesPF = (ArrayList<ClientePF>) arquivoClientePF
+                                        .lerArquivo("./lab06/dados/clientesPF.csv", listaVeiculos);
+                        System.out.println(listaClientesPF);
+                        for (ClientePF _clientePF : listaClientesPF) {
+                                seguradora.cadastrarCliente(_clientePF);
+                        }
+                        System.out.println("===============================");
+
+                        System.out.println("==== Importando clientes PJ ====");
+                        ArquivoClientePJ arquivoClientePJ = new ArquivoClientePJ();
+                        ArrayList<ClientePJ> listaClientesPJ = (ArrayList<ClientePJ>) arquivoClientePJ
+                                        .lerArquivo("./lab06/dados/clientesPJ.csv", listaFrotas);
+                        System.out.println(listaClientesPJ);
+                        for (ClientePJ _clientePJ : listaClientesPJ) {
+                                seguradora.cadastrarCliente(_clientePJ);
+                        }
+                        System.out.println("===============================");
+
+                        for (Condutor condutores : listaCondutores) {
+                                if (Character.getNumericValue(condutores.getCpf().charAt(0)) < 5) {
+                                        seguroPF.autorizarCondutor(condutores);
+                                } else {
+                                        seguroPJ.autorizarCondutor(condutores);
+                                }
+                        }
+
+                        Menu menu = new Menu(listaSeguradoras);
+                        while (menu.next()) {
+                        }
+                        System.out.println("===============================");
                         System.out.println("==== Exportando seguros ====");
                         ArquivoSeguro arquivoSeguro = new ArquivoSeguro();
-                        arquivoSeguro.gravarArquivo("seguros.csv", seguradora.getListaSeguros());
+                        arquivoSeguro.gravarArquivo("./lab06/dados/seguros.csv", seguradora.getListaSeguros());
                         System.out.println("===============================");
 
                         System.out.println("==== Exportando sinistros ====");
@@ -147,49 +203,9 @@ public class AppMain {
                                 listaSinistros.addAll(seguro.getListaSinistros());
                         }
                         ArquivoSinistro arquivoSinistro = new ArquivoSinistro();
-                        arquivoSinistro.gravarArquivo("sinistros.csv", listaSinistros);
+                        arquivoSinistro.gravarArquivo("./lab06/dados/sinistros.csv", listaSinistros);
                         System.out.println("===============================");
-
-                        System.out.println("==== Importando condutores ====");
-                        ArquivoCondutor arquivoCondutores = new ArquivoCondutor();
-                        ArrayList<Condutor> listaCondutores = (ArrayList<Condutor>) arquivoCondutores
-                                        .lerArquivo("arquivos/condutores.csv");
-                        System.out.println(listaCondutores);
-                        System.out.println("===============================");
-
-                        System.out.println("==== Importando veiculos ====");
-                        ArquivoVeiculo arquivoVeiculo = new ArquivoVeiculo();
-                        ArrayList<Veiculo> listaVeiculos = (ArrayList<Veiculo>) arquivoVeiculo
-                                        .lerArquivo("arquivos/veiculos.csv");
-                        System.out.println(listaVeiculos);
-                        System.out.println("===============================");
-
-                        System.out.println("==== Importando frotas ====");
-                        ArquivoFrota arquivoFrota = new ArquivoFrota();
-                        ArrayList<Frota> listaFrotas = (ArrayList<Frota>) arquivoFrota
-                                        .lerArquivo("arquivos/frotas.csv", listaVeiculos);
-                        System.out.println(listaFrotas);
-                        System.out.println("===============================");
-
-                        System.out.println("==== Importando clientes PF ====");
-                        ArquivoClientePF arquivoClientePF = new ArquivoClientePF();
-                        ArrayList<ClientePF> listaClientesPF = (ArrayList<ClientePF>) arquivoClientePF
-                                        .lerArquivo("arquivos/clientesPF.csv", listaVeiculos);
-                        System.out.println(listaClientesPF);
-                        System.out.println("===============================");
-
-                        System.out.println("==== Importando clientes PJ ====");
-                        ArquivoClientePJ arquivoClientePJ = new ArquivoClientePJ();
-                        ArrayList<ClientePJ> listaClientesPJ = (ArrayList<ClientePJ>) arquivoClientePJ
-                                        .lerArquivo("arquivos/clientesPJ.csv", listaFrotas);
-                        System.out.println(listaClientesPJ);
-                        System.out.println("===============================");
-
-                        // TODO
-                        // Menu menu = new Menu(listaSeguradoras);
-                        // while (true) {
-                        // menu.next();
-                        // }
+                        System.exit(0);
 
                 } catch (Exception e) {
                         System.out.println(e);

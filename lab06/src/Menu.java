@@ -42,13 +42,17 @@ public class Menu {
         return listaSeguradoras;
     }
 
-    public void next() {
+    public boolean next() {
         imprimirMenu();
         try {
             int comando = nextComando();
-            executar(comando);
+            if ((executar(comando))) {
+                return true;
+            }
+            return false;
         } catch (Exception e) {
             System.out.println(e);
+            return true;
         }
     }
 
@@ -57,8 +61,11 @@ public class Menu {
         return Integer.parseInt(entrada);
     }
 
-    public void executar(int operacao) {
-        executarFuncao(MenuOperacoes.getEnum(10 * menuAtual.getMenuOperacoes() + operacao));
+    public boolean executar(int operacao) {
+        if (executarFuncao(MenuOperacoes.getEnum(10 * menuAtual.getMenuOperacoes() + operacao)) == false) {
+            return false;
+        }
+        return true;
     }
 
     private void imprimirMenu() {
@@ -75,7 +82,7 @@ public class Menu {
         }
     }
 
-    private void executarFuncao(MenuOperacoes operacao) {
+    private boolean executarFuncao(MenuOperacoes operacao) {
         Cliente cliente;
         ClientePF clientePF;
         ClientePJ clientePJ;
@@ -88,7 +95,7 @@ public class Menu {
         switch (operacao) {
             case INICIAL:
                 if (menuAtual == MenuOperacoes.INICIAL) {
-                    System.exit(0);
+                    return false;
                 }
                 setMenuAtual(operacao);
                 break;
@@ -373,7 +380,9 @@ public class Menu {
                     System.out.println(divisor);
                 }
                 break;
+
         }
+        return true;
 
     }
 

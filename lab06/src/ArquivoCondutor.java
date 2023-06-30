@@ -1,5 +1,3 @@
-// TODO Saber exatamente como proceder com o retorn de string e etc
-
 import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;

@@ -6,7 +6,6 @@ import java.io.IOException;
 public class ArquivoSeguro implements IArquivo {
 
     public boolean gravarArquivo(String nomeArquivo, ArrayList<?> listaObjetos) {
-        // TODO como adicionar frotas/veiculos?
 
         ArrayList<Seguro> listaSeguros = (ArrayList<Seguro>) listaObjetos;
 
